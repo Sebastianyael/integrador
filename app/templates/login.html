@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/utilty-clases.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <header>
+        <img src="" alt="">
+    </header>
+</head>
+<body>
+    <div class="space" >
+        <div class="card">
+            <div class="login">
+                <p>Inicio de Sesion</p>
+                <img src="{{ url_for('static', filename='images/user.avif') }}" alt="">
+                <form action="" method="post">
+                    
+                    <label for="input">Matricula</label>
+                    <br>
+                    <input type="number">
+                    <br>
+                    <label for="password">Contraseña</label>
+                    <br>
+                    <input type="password">
+                    <br>
+                    <br>
+                    <button type="submit" class="send"><span>Ingresar</span></button>
+                </form>
+            </div>
+
+            <div class="carrusel">
+
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <a href="https://www.youtube.com/channel/UCDOXPYQLQZs8uj88ESJiTlA/videos"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.facebook.com/utvtol/?locale=es_LA"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.instagram.com/utvtoficial/?hl=es"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://utvt.edomex.gob.mx/"><i class="fa-solid fa-globe"></i></a>
+    </footer>
+</body>
+</html>
