@@ -1,0 +1,5 @@
+.\env\Scripts\activate   activa el entorno virtual
+
+deactivate   desactiva el entorno virtual
+
+http://localhost:8012/phpmyadmin/index.php?route=/sql&pos=0&db=prueba&table=alumnos  link de phpMyAdmin

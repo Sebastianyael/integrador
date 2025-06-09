@@ -1,9 +1,8 @@
 :root{
     --fuente: "Roboto" , sans-serif;
     --color-font-white: white;
-    --bg-color: linear-gradient(135deg, #a8e063, #56ab2f);
-;
-;
+    --bg-color: #611232;
+    /*--bg-color: linear-gradient(135deg, #a8e063, #56ab2f);*/
 }
 
 .roboto{
@@ -11,8 +10,7 @@
   font-optical-sizing: auto;
   font-weight: weight;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+  font-variation-settings:"wdth" 100;
 }
 
 *{
@@ -30,10 +28,11 @@ body{
 
 
 header{
-    background: var(--bg-color);
+    background-color: var(--bg-color);
     width: 100%;
     height: 100px;
     display: flex;
+    opacity: var(--opacity);
 }
 
 .space{ 
@@ -42,6 +41,7 @@ header{
     display: flex;
     justify-content: center;
     align-items: center ;
+    opacity: var(--opacity);
 }
 
 .card{
@@ -85,7 +85,7 @@ header{
     height: 40px;
     border-radius: 25px 25px 25px 25px;
     padding-left: 5px;
-    font-size: large;
+    font-size: 15px;
 
 }
 
@@ -105,7 +105,6 @@ header{
     color: black;
     font-family: var(--fuente);
     font-size: 15px;
-    font-weight: 300;
     border: 2px solid black;
     border-radius: 10px 10px 10px 10px;
     cursor: pointer;
@@ -123,25 +122,31 @@ header{
 .carrusel{
     width: 45%;
     height: 500px;
-    border: 2px solid black;
-
 }
 
+.carrusel img{
+    width: 100%;
+    height: 500px;
+    border-radius: 40px;
+    object-fit: cover;
+    transition: opacity 0.8s ease;
+}
 
 footer{
-    background: var(--bg-color);
+    background-color: var(--bg-color);
     width: 100%;
     height: 30px;
     transition: .3s ease all;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
+    opacity: var(--opacity);
 }
 
 
 i{
-    color: black;
+    color: rgb(195, 192, 192);
     font-size: 23px;
     transition: .4s ease all;
 }
@@ -156,4 +161,130 @@ i:hover{
 footer:hover{
     height: 70px;
     transition: .3s ease all;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #111111bd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    pointer-events: all;
+}
+
+.modal-card {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 900px;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    pointer-events: all;
+}
+
+.close-card{
+    transform: translateY(-100vh) !important;
+    transition: transform .4s !important;
+    pointer-events: none;
+}
+
+.close-modal{
+    opacity: 0;
+    transition: opacity .9s;
+    pointer-events: none;
+}
+
+
+/* Sección izquierda */
+.modal-text {
+    width: 50%;
+    min-width: 300px;
+    padding: 2%;
+    font-family: var(--fuente);
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    word-spacing: 5px;
+    background-color: #FAF8F8;
+    box-sizing: border-box;
+}
+
+/* Botón */
+.modal-text button {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--fuente);
+    background-color: rgb(231, 229, 229);
+    transition: width 0.8s ease, background-color 0.8s ease;
+    overflow: hidden;
+}
+
+.modal-text button p {
+    font-size: 0px;
+    margin: 0;
+}
+
+/* Hover del botón */
+.modal-text button:hover {
+    width: 150px;
+    background-color: rgb(106, 190, 167);
+    cursor: pointer;
+}
+
+.modal-text button:hover p {
+    font-size: 15px;
+    color: black;
+    transition: font-size 0.8s ease;
+}
+
+/* Sección derecha (imagen) */
+.modal-image {
+    width: 50%;
+    min-width: 300px;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.modal-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/*  Para pantallas pequeñas (tablet y móvil) */
+@media (max-width: 768px) {
+    .modal-card {
+        flex-direction: column;
+        width: 70%;
+        height: auto;
+    }
+
+    .modal-text, .modal-image {
+        width: 100%;
+        height: auto;
+        font-size: 15px;
+        word-spacing: 5px;
+    }
+
+    .modal-text button {
+        width: 60px;
+    }
+
+    .modal-text button:hover {
+        width: 50%;
+    }
 }

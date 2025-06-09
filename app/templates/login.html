@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <script src="{{ url_for('static', filename = 'JS/login.js')}}" defer></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/utilty-clases.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -18,14 +19,13 @@
                 <p>Inicio de Sesion</p>
                 <img src="{{ url_for('static', filename='images/user.avif') }}" alt="">
                 <form action="" method="post">
-                    
-                    <label for="input">Matricula</label>
                     <br>
-                    <input type="number">
+                    <i class="fa-regular fa-user icon-color"></i>
+                    <input type="number" placeholder="Matricula">
                     <br>
-                    <label for="password">Contraseña</label>
                     <br>
-                    <input type="password">
+                    <i class="fa-solid fa-lock icon-color"></i>
+                    <input type="password" placeholder="Contraseña">
                     <br>
                     <br>
                     <button type="submit" class="send"><span>Ingresar</span></button>
@@ -33,9 +33,47 @@
             </div>
 
             <div class="carrusel">
-
+                <img id="carrusel" src="{{ url_for('static', filename = 'images/utvt1.jpg') }}">
             </div>
+
+            <script>
+                const imagenes = [
+                    "{{ url_for('static', filename = 'images/utvt1.jpg') }}",
+                    "{{ url_for('static', filename = 'images/utvt2.jpg') }}",
+                    "{{ url_for('static', filename = 'images/utvt3.jpg') }}"
+                ]
+
+                const imagen = document.getElementById('carrusel');
+                let indice = 0;
+
+                setInterval(() => {
+                imagen.style.opacity = 0;
+                setTimeout(() => {
+                indice = (indice + 1) % imagenes.length;
+                imagen.src = imagenes[indice];
+                imagen.style.opacity = 1;
+                    }, 500);
+                }, 5000);
+            </script>
+
         </div>
+    </div>
+
+    <div class="modal" id="modal">
+       <div class="modal-card" id="modal-card">
+            <div class="modal-text">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis tempore, fugit laborum quisquam maxime cum inventore rerum placeat et voluptate qui ut modi illo natus?
+                </p>
+
+                <button id="close-button"><i class="fa-solid fa-crow icon-color"></i><p>Bienvenido</p></button>
+            </div>
+
+            <div class="modal-image">
+                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+            </div>
+       </div>
+
     </div>
     
     <footer>
