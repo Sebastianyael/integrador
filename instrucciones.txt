@@ -1,5 +1,25 @@
-.\env\Scripts\activate   activa el entorno virtual
+http://localhost:8012/phpmyadmin/index.php?route=/sql&pos=0&db=prueba&table=alumnos  link de phpMyAdmin (solo sebastian)
+ 
 
-deactivate   desactiva el entorno virtual
+paso 1 todo en la terminal de visual studio code 
 
-http://localhost:8012/phpmyadmin/index.php?route=/sql&pos=0&db=prueba&table=alumnos  link de phpMyAdmin
+python -m venv env  (comando para descargar el entorno virtual) 
+
+pip install flask (comando para descargar flask)
+
+pip install flask-mysqldb  (comando para descargar mysql para flask)
+
+deactivate (comando para desactivar el entorno virtual)
+
+
+paso 2 clonar el repositorio
+una vez se halla instalado git , creado una cuenta de github y enlazarlos
+en la terminal de visula studio code
+
+git clone https://github.com/Sebastianyael/integrador.git
+
+.\env\Scripts\activate  (activa el entorno virtual)
+
+python .\app\app.py  (Ejecuta el script de python)
+
+http://127.0.0.1:5000  (ingresar a esa ruta en tu navegador)

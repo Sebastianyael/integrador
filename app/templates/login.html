@@ -18,17 +18,20 @@
             <div class="login">
                 <p>Inicio de Sesion</p>
                 <img src="{{ url_for('static', filename='images/user.avif') }}" alt="">
-                <form action="" method="post">
+                <form action="/main-feed" method="post" id="form">
+                    <label for="" id="label-one"></label>
                     <br>
                     <i class="fa-regular fa-user icon-color"></i>
-                    <input type="number" placeholder="Matricula">
+                    <input type="number" placeholder="Matricula" name="matricula" id="matricula" >
                     <br>
+                    <br>
+                    <label for="" id="label-two"></label>
                     <br>
                     <i class="fa-solid fa-lock icon-color"></i>
-                    <input type="password" placeholder="Contraseña">
+                    <input type="password" placeholder="Contraseña" name="contraseña" id="contraseña">
                     <br>
                     <br>
-                    <button type="submit" class="send"><span>Ingresar</span></button>
+                    <button type="submit" class="send" id="enviar"><span>Ingresar</span></button>
                 </form>
             </div>
 
@@ -47,12 +50,10 @@
                 let indice = 0;
 
                 setInterval(() => {
-                imagen.style.opacity = 0;
-                setTimeout(() => {
-                indice = (indice + 1) % imagenes.length;
-                imagen.src = imagenes[indice];
-                imagen.style.opacity = 1;
-                    }, 500);
+                    setTimeout(() => {
+                    indice = (indice + 1) % imagenes.length;
+                    imagen.src = imagenes[indice];
+                        }, 500);
                 }, 5000);
             </script>
 
@@ -62,9 +63,7 @@
     <div class="modal" id="modal">
        <div class="modal-card" id="modal-card">
             <div class="modal-text">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis tempore, fugit laborum quisquam maxime cum inventore rerum placeat et voluptate qui ut modi illo natus?
-                </p>
+                <p id="text-card"></p>
 
                 <button id="close-button"><i class="fa-solid fa-crow icon-color"></i><p>Bienvenido</p></button>
             </div>
@@ -77,10 +76,11 @@
     </div>
     
     <footer>
-        <a href="https://www.youtube.com/channel/UCDOXPYQLQZs8uj88ESJiTlA/videos"><i class="fa-brands fa-youtube"></i></a>
-        <a href="https://www.facebook.com/utvtol/?locale=es_LA"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://www.instagram.com/utvtoficial/?hl=es"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://utvt.edomex.gob.mx/"><i class="fa-solid fa-globe"></i></a>
+        <a href="https://www.youtube.com/channel/UCDOXPYQLQZs8uj88ESJiTlA/videos" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.facebook.com/utvtol/?locale=es_LA" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.instagram.com/utvtoficial/?hl=es" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://utvt.edomex.gob.mx/" target="_blank"><i class="fa-solid fa-globe"></i></a>
+        <a href="https://www.tiktok.com/discover/utvt-universidad-tecnologica-de-toluca" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
     </footer>
 </body>
 </html>
