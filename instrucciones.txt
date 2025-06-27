@@ -23,3 +23,6 @@ git clone https://github.com/Sebastianyael/integrador.git
 python .\app\app.py  (Ejecuta el script de python)
 
 http://127.0.0.1:5000  (ingresar a esa ruta en tu navegador)
+
+
+ViHNAGbZRL9 contraseña de la BD de Mongo

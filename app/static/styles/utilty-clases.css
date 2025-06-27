@@ -1,3 +1,11 @@
-.icon-color{
-    color: black !important;
+.on{
+    display: grid;
+}
+
+.off{
+    display: none;
+}
+
+.th-heigth{
+    height: 5vh !important;
 }

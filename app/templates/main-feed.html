@@ -2,10 +2,431 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static' , filename = 'styles/student-feed.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/utilty-clases.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <script src="{{url_for('static' , filename='JS/student-feed.js')}}" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <h1>Hola mundo</h1>
+<body >
+    <header>
+
+    </header>
+
+    <aside>
+        <button class="estado" id="home">
+            <i class="bi bi-house-door"></i>
+            <p>Inicio</p>
+        </button>
+        
+        <button id="calificaciones">
+            <i class="bi bi-mortarboard"></i>
+            <p>Mis calificaciones</p>
+        </button>
+        
+        <button id="horario">
+            <i class="bi bi-clock"></i>
+            <p>Mi Horario</p>
+        </button>
+        
+        <button id="calendario">
+            <i class="bi bi-calendar"></i>
+            <p>Calendario</p>
+        </button>
+        
+        <button id="profesores">
+            <i class="bi bi-person-video3"></i>
+            <p>Profesores</p>
+        </button>
+
+    </aside>
+
+    <div class="feed-container on" id="feed-container">
+        <div class="calificaciones" id="calificaciones-card">
+            <i class="fa-solid fa-pen-nib"></i>
+            <h1>Calificaciones</h1>
+            <h2>Aqui encontraras tus calificaciones</h2>
+            <Button>Vamos</Button>
+
+        </div>
+
+        <div class="horario" id="horario-card">
+            <i class="fa-solid fa-clock"></i>
+            <h1>Mi Horario</h1>
+            <h2>Tiempo de clase</h2>
+            <Button>Vamos</Button>
+
+        </div>
+
+        <div class="calendario" id="calendario-card">
+            <i class="fa-solid fa-calendar-days"></i>
+            <h1>Calendario</h1>
+            <h2>Fechas Importantes</h2>
+            <Button>Vamos</Button>
+
+        </div>
+
+        <div class="profesores" id="profesores-card">
+            <i class="fa-solid fa-user-tie"></i>
+            <h1>Profesores</h1>
+            <h2>Los mejores en su area</h2>
+            <Button>Vamos</Button>
+        </div>
+
+        <div class="student-info" id="student-card">
+            <i class="fa-solid fa-school"></i>
+            <h1>Tu</h1>
+            <h2>Informacion personal</h2>
+            <Button>Vamos</Button>
+        </div>
+    </div>
+
+    <div class="calificaciones-panel off" id="calificaciones-panel">
+        <div class="panel-info">
+            
+            <img src="{{ url_for('static' , filename = 'images/logo.png')}}" alt="">
+            <p class="name">Sebastian Yael Martinez Martinez</p>
+
+            <p class="matricula">Matricula: </p>
+
+            <p class="carrera">Carrera: </p>
+
+            <p class="correo">Correo: </p>
+
+            <p class="curso">Curso: </p>
+
+        </div>
+
+        <div class="resumen-academico">
+
+            <div>
+                <i class="fa-solid fa-brain"></i>
+                <p>Promedio General</p>
+                <p></p>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-book"></i>
+                <p>Materias</p>
+                <p></p>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-percent"></i>
+                <p>Avance</p>
+                <p></p>
+            </div>
+
+        </div>
+
+        <div class="grafic-container">
+            <p>Grafica de Desempeño</p>
+
+        </div>
+
+        <div class="faltas">
+            <p>Faltas</p>
+
+        </div>
+
+        <div class="notes-container">
+            <h2 style="text-align: center;">Tabla de Calificaciones</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Materia</th>
+                            <th>Profesor</th>
+                            <th>Evaluación 1</th>
+                            <th>Evaluación 2</th>
+                            <th>Evaluación 3</th>
+                            <th>Promedio General</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Matemáticas</td>
+                            <td>Prof. García</td>
+                            <td>8.5</td>
+                            <td>9.0</td>
+                            <td>7.5</td>
+                            <td>8.33</td>
+                            <td>Aprobado</td>
+                        </tr>
+                        <tr>
+                            <td>Historia</td>
+                            <td>Prof. López</td>
+                            <td>7.0</td>
+                            <td>8.0</td>
+                            <td>7.5</td>
+                            <td>7.5</td>
+                            <td>Aprobado</td>
+                        </tr>
+                        <tr>
+                            <td>Ciencias</td>
+                            <td>Prof. Martínez</td>
+                            <td>9.5</td>
+                            <td>8.5</td>
+                            <td>9.0</td>
+                            <td>9.0</td>
+                            <td>Aprobado</td>
+                        </tr>
+                        <tr>
+                            <td>Geografía</td>
+                            <td>Prof. Hernández</td>
+                            <td>6.0</td>
+                            <td>7.0</td>
+                            <td>6.5</td>
+                            <td>6.5</td>
+                            <td>Reprobado</td>
+                        </tr>
+                        <tr>
+                            <td>Educación Física</td>
+                            <td>Prof. Ramírez</td>
+                            <td>9.0</td>
+                            <td>9.5</td>
+                            <td>9.0</td>
+                            <td>9.17</td>
+                            <td>Aprobado</td>
+                        </tr>
+                        <tr>
+                            <td>Artes</td>
+                            <td>Prof. Jiménez</td>
+                            <td>8.0</td>
+                            <td>7.5</td>
+                            <td>8.0</td>
+                            <td>7.83</td>
+                            <td>Aprobado</td>
+                        </tr>
+                        <tr>
+                            <td>Inglés</td>
+                            <td>Prof. Sánchez</td>
+                            <td>7.5</td>
+                            <td>7.0</td>
+                            <td>6.5</td>
+                            <td>7.0</td>
+                            <td>Aprobado</td>
+                        </tr>
+                     </tbody>
+                </table>
+        </div>
+
+    </div>
+
+    <div class="horario-container off" id="feed-horario">
+        <h1>Horario del Estudiante</h1>
+
+        <div class="datos-horario">
+            <p class="nombre">Sebastian Yael Martinez Martinez</p>
+            <p class="cuatrimestre">3 cuatrimestre</p>
+            <p class="año">2025</p>
+            <p class="grupo">ITIID-DSM33</p>
+        </div>
+
+        <div class="horario-table-container">
+            <table class="horario-table">
+                <tr>
+                    <th class="th-heigth">Hora</th>
+                    <th class="th-heigth">lunes</th>
+                    <th class="th-heigth">Martes</th>
+                    <th class="th-heigth">Miercoles</th>
+                    <th class="th-heigth">Jueves</th>
+                    <th class="th-heigth">Viernes</th>
+                    <th class="th-heigth">Sabado</th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="feed-calendar off" id="feed-calendar">
+        <div class="calendar-container">
+            <h1>Calendario Escolar</h1>
+            <img src="{{url_for('static'  , filename='images/calendario.png')}}" alt="">
+        </div>
+    </div>
+
+    <div class="feed-teacher off" id="feed-teacher">
+        <section class="feed-teacher__card">
+            <div class="cortina">
+            </div>
+            <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
+            <h1>Dr.Norma Maya</h1>
+            <p>Especialidad en Redes</p>
+            <p>al1312321.@gmail.com</p>
+            <p>1qs32dSm</p>
+        </section>
+        <section class="feed-teacher__card">
+            <div class="cortina">
+            </div>
+            <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
+            <h1>Dr.Norma Maya</h1>
+            <p>Especialidad en Redes</p>
+            <p>al1312321.@gmail.com</p>
+            <p>1qs32dSm</p>
+        </section>
+        <section class="feed-teacher__card">
+            <div class="cortina">
+            </div>
+            <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
+            <h1>Dr.Norma Maya</h1>
+            <p>Especialidad en Redes</p>
+            <p>al1312321.@gmail.com</p>
+            <p>1qs32dSm</p>
+        </section> 
+    </div>
 </body>
 </html>
