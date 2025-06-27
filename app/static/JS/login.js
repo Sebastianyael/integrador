@@ -1,6 +1,6 @@
 const textCard = document.getElementById('text-card')
 const text = "Hola y Bienvenido al sistema de ReNova UTVT"
-const speed = 40
+const speed = 34
 let i = 0
 
 function type(){

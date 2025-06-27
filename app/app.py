@@ -10,12 +10,6 @@ app.config['MYSQL_DB'] = 'prueba'
 
 conexion = MySQL(app)
 
-
-@app.route('/')
-def index():
-    return render_template('login.html')
-
-
 @app.route('/main-feed' , methods = ['POST'])
 def feed():
     try:
@@ -29,11 +23,14 @@ def feed():
         if result:
             return render_template('main-feed.html')
         else:
-            return 'Error matricula o contraseña no encontrados'
+            return render_template('login.html')
         
     except Exception as e:
-        return f"❌ Error de conexión: {str(e)}"
-
+        return f"Error de conexión: {str(e)}"
+    
+@app.route('/')
+def index():
+    return render_template('login.html')
 
 if(__name__ == '__main__'):
     app.run(debug = True)
