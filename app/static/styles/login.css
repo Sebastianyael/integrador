@@ -1,59 +1,63 @@
-:root{                                  /*Variables css*/            
-    --fuente: "Roboto" , sans-serif;
+:root { /* Variables css */
+    --fuente: "Roboto", sans-serif;
     --color-font-white: white;
-    --bg-color: #56ab2f;   
+    --bg-color: #56ab2f;
+    --border-rad: 30px;
 }
 
-.roboto{
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
-  font-variation-settings:"wdth" 100;
+.roboto {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
 }
 
-*{/*Elimina los estilos por defecto de la pagina web*/
-    margin: 0px;
-    padding: 0px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 💡 Esto mejora la responsividad controlando bien tamaños */
 }
 
-body{
+body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background-color: #FEFDFC;
 }
 
-
-header{
+header {
     background: var(--bg-color);
     width: 100%;
     height: 100px;
     display: flex;
 }
 
-.space{ 
+.space {
     flex: 1;
     padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: center ;
+    align-items: center;
 }
 
-.card{
+.card {
     width: 70%;
-    height: 600px;
+    max-width: 1000px; /* 💡 Controlamos el tamaño máximo */
+    height: auto;
     display: flex;
+    flex-wrap: wrap; /* 💡 Importante para adaptarse en pantallas chicas */
     background-color: white;
     justify-content: center;
     align-items: center;
-    border-radius: 30px 30px 30px 30px;
+    border-radius: 30px;
     box-shadow: 1px 5px 5px -1px rgb(199, 197, 197);
+    padding: 20px;
 }
 
-.login{
+.login {
     width: 45%;
-    height: 500px;
+    min-width: 280px; /* 💡 Mínimo para que no se achique demasiado */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -61,40 +65,33 @@ header{
     color: rgb(14, 14, 14);
     font-family: var(--fuente);
     font-size: 30px;
+    gap: 15px; /* 💡 Espacio entre elementos */
 }
 
-.login label{
-    color: rgb(211, 28, 28);
-    font-size: 13px;
-    font-family: var(--fuente);
-    margin-right: 100px;
-}
-
-.login img{
-    width: 150px;    
+.login img {
+    width: 150px;
     height: 150px;
-    object-fit: cover;   
+    object-fit: cover;
     border-radius: 50%;
-    margin-left: 35%;   
+    margin: 0 auto; /* 💡 Centrado más limpio */
 }
 
-.login input{
+.login input {
     border: 1px solid gray;
     width: 50%;
     height: 40px;
-    border-radius: 25px 25px 25px 25px;
+    border-radius: 25px;
     padding-left: 5px;
     font-size: 15px;
-
+    margin: 0 auto; /* 💡 Centrado */
 }
 
 .login input:focus {
     outline: none;
     border: 3px solid rgb(106, 190, 167);
-    border-radius: 25px 25px 25px 25px;
 }
 
-.send{
+.send {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -105,32 +102,32 @@ header{
     font-family: var(--fuente);
     font-size: 15px;
     border: 2px solid black;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 10px;
     cursor: pointer;
     transition: .3s ease-in-out all;
+    margin: 0 auto; /* 💡 Centrado */
 }
 
-.send:hover{
-    transition: .3s ease-in-out all;
+.send:hover {
     border: none;
     background-color: rgb(106, 190, 167);
     color: white;
-    translate: 0px 7px;
+    transform: translateY(7px);
 }
 
-.carrusel{
+.carrusel {
     width: 45%;
-    height: 500px;
+    min-width: 280px;
 }
 
-.carrusel img{
+.carrusel img {
     width: 100%;
-    height: 500px;
+    height: auto;
     border-radius: 20px;
     object-fit: cover;
 }
 
-footer{
+footer {
     background: var(--bg-color);
     width: 100%;
     height: 30px;
@@ -139,40 +136,31 @@ footer{
     justify-content: center;
     align-items: center;
     gap: 40px;
-    opacity: var(--opacity);
 }
 
-
-i{
+i {
     color: rgb(195, 192, 192);
     font-size: 23px;
     transition: .4s ease all;
 }
 
-i:hover{
-    transition: .4s ease all;
+i:hover {
     font-size: 35px;
     color: white;
 }
 
-
-footer:hover{
+footer:hover {
     height: 70px;
-    transition: .3s ease all;
 }
 
 .modal {
     position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 0; bottom: 0; left: 0; right: 0;
     background-color: #111111bd;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    box-sizing: border-box;
     pointer-events: all;
 }
 
@@ -184,26 +172,25 @@ footer:hover{
     background-color: white;
     border-radius: 15px;
     overflow: hidden;
-    pointer-events: all;
+    height: 50vh;
 }
 
-.close-card{
+.close-card {
     transform: translateY(-100vh) !important;
     transition: transform .4s !important;
     pointer-events: none;
 }
 
-.close-modal{
+.close-modal {
     opacity: 0;
     transition: opacity .9s;
     pointer-events: none;
 }
 
-
-/* Sección izquierda */
 .modal-text {
     width: 50%;
     min-width: 300px;
+    height: 50vh;
     padding: 2%;
     font-family: var(--fuente);
     font-size: 20px;
@@ -213,30 +200,26 @@ footer:hover{
     align-items: center;
     word-spacing: 5px;
     background-color: #FAF8F8;
-    box-sizing: border-box;
 }
 
-/* Botón */
 .modal-text button {
     height: 50px;
     width: 50px;
-    border-radius: 50px;
+    border-radius: var(--border-rad);
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
     font-family: var(--fuente);
-    background-color: rgb(231, 229, 229);
+    background-color: var(--color-font-white);
     transition: width 0.8s ease, background-color 0.8s ease;
     overflow: hidden;
 }
 
 .modal-text button p {
-    font-size: 0px;
+    font-size: 0;
     margin: 0;
 }
 
-/* Hover del botón */
 .modal-text button:hover {
     width: 150px;
     background-color: rgb(106, 190, 167);
@@ -249,12 +232,9 @@ footer:hover{
     transition: font-size 0.8s ease;
 }
 
-/* Sección derecha (imagen) */
 .modal-image {
     width: 50%;
     min-width: 300px;
-    height: auto;
-    box-sizing: border-box;
 }
 
 .modal-image img {
@@ -263,26 +243,64 @@ footer:hover{
     object-fit: cover;
 }
 
-/*  Para pantallas pequeñas (tablet y móvil) */
-@media (max-width: 768px) {
-    .modal-card {
+label{
+    font-size: 15px;
+    color: red;
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .card {
+        width: 90%;
         flex-direction: column;
-        width: 70%;
-        height: auto;
     }
 
-    .modal-text, .modal-image {
+    .login {
+        width: 80%;
+    }
+
+
+    header{
+        height: 80px;
+    } 
+    
+}
+
+@media (max-width: 768px) {
+    .carrusel{
+        display: none;
+    }
+
+
+    .modal-card {
+        flex-direction: column;
+        width: 90%;
+        height:20vh;
+        text-align: center;
+    }
+
+    .modal-text{
         width: 100%;
-        height: auto;
         font-size: 15px;
-        word-spacing: 5px;
+    }
+
+    .modal-image img{
+        display: none;
     }
 
     .modal-text button {
-        width: 60px;
+        width: 50px;
+        
     }
 
     .modal-text button:hover {
         width: 50%;
     }
+
+    .login {
+        width: 100%;
+        font-size: 25px;
+    }
+
+    
 }

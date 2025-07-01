@@ -26,3 +26,8 @@ http://127.0.0.1:5000  (ingresar a esa ruta en tu navegador)
 
 
 ViHNAGbZRL9 contraseña de la BD de Mongo
+mongodb+srv://sebastianyael963:ViHNAGbZRL9@integradora.onlvtmq.mongodb.net/?retryWrites=true&w=majority&appName=Integradora link de la BD de mongo
+
+npx tunnelmole 5000       
+
+pip freeze > requirements.txt  actualiza el archivo requirements.txt 
