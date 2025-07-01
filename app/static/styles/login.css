@@ -118,6 +118,7 @@ header {
 .carrusel {
     width: 45%;
     min-width: 280px;
+    display: flex;
 }
 
 .carrusel img {
@@ -252,7 +253,7 @@ label{
 @media (max-width: 1024px) {
     .card {
         width: 90%;
-        flex-direction: column;
+        
     }
 
     .login {

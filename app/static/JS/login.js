@@ -1,18 +1,18 @@
 
-const textCard = document.getElementById('text-card')
-const text = "Hola y Bienvenido al sistema de ReNova UTVTiuwhhucferncf sedfnerwiucfjeirc ewronfineiuwrjnfc wierjfniuerwnf wieufniewunf wiuefbiuerncf iwuenfciubnewrc"
-const speed = 34
-let i = 0
+// const textCard = document.getElementById('text-card')
+// const text = "Hola y Bienvenido al sistema de ReNova UTVTiuwhhucferncf sedfnerwiucfjeirc ewronfineiuwrjnfc wierjfniuerwnf wieufniewunf wiuefbiuerncf iwuenfciubnewrc"
+// const speed = 34
+// let i = 0
 
-function type(){
-    if(i < text.length){
-        textCard.textContent += text.charAt(i)
-        i++
-        setTimeout(type , speed)
-    }
-}
+// function type(){
+//     if(i < text.length){
+//         textCard.textContent += text.charAt(i)
+//         i++
+//         setTimeout(type , speed)
+//     }
+// }
 
-type()
+// type()
 
 
 
