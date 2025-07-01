@@ -116,13 +116,15 @@ header {
 }
 
 .carrusel {
-    width: 45%;
+    width: 50%;
     min-width: 280px;
+    display: flex;
+    
 }
 
 .carrusel img {
     width: 100%;
-    height: auto;
+    height: 65vh;
     border-radius: 20px;
     object-fit: cover;
 }
@@ -139,12 +141,16 @@ footer {
 }
 
 i {
-    color: rgb(195, 192, 192);
+    color: black;
     font-size: 23px;
     transition: .4s ease all;
 }
 
-i:hover {
+footer i{
+    color: rgb(195, 192, 192);
+}
+
+footer i:hover {
     font-size: 35px;
     color: white;
 }
@@ -248,11 +254,14 @@ label{
     color: red;
 }
 
+
+
+
 /* Responsividad */
 @media (max-width: 1024px) {
     .card {
         width: 90%;
-        flex-direction: column;
+        
     }
 
     .login {
