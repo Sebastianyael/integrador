@@ -1,5 +1,6 @@
+
 const textCard = document.getElementById('text-card')
-const text = "Hola y Bienvenido al sistema de ReNova UTVT"
+const text = "Hola y Bienvenido al sistema de ReNova UTVTiuwhhucferncf sedfnerwiucfjeirc ewronfineiuwrjnfc wierjfniuerwnf wieufniewunf wiuefbiuerncf iwuenfciubnewrc"
 const speed = 34
 let i = 0
 
@@ -12,6 +13,7 @@ function type(){
 }
 
 type()
+
 
 
 const closeButton = document.getElementById('close-button') 
