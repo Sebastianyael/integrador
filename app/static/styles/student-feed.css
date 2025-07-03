@@ -151,33 +151,33 @@
     .horario{
         grid-column: 3 / 25;
         grid-row: 5 / 21;
-        background-image: url("/static/images/horario.jpg");
+        background-image: url("/static/images/hor.webp");
         color: var(--color-font-white) !important;
     }
 
     .calificaciones{
         grid-column: 29 / 50;
         grid-row: 5 / 30;
-        background-image: url("/static/images/cal.jpg");
+        background-image: url("/static/images/cal.webp");
     }
 
 
     .calendario{
         grid-column: 55 / 70;
         grid-row: 5 / 15;
-        background-image: url("/static/images/calen.crdownload");
+        background-image: url("/static/images/calen.webp");
     }
 
     .profesores{
         grid-column: 3 / 25;
         grid-row: 22 / 30;
-        background-image: url("/static/images/prof.jpg");
+        background-image: url("/static/images/prof.webp");
     }
 
     .student-info{
       grid-column: 55 / 70;
       grid-row: 17 / 30;
-      background-image: url("/static/images/estudent.jpg");
+      background-image: url("/static/images/estudent.webp");
     }
 
     .feed-container div:hover i{
@@ -534,21 +534,7 @@
 
   }
 
-  .bars{
-    width: 5vh;
-    height: 5vh;
-    background-color: white;
-    border-radius: 15px;
-    border: none;
-    transition: 0.3s ease all;
-  }
-
-  .bars:hover{
-    width: 6vh;
-    height: 6vh;
-    transform: translateY(-5px);
-    transition: 0.3s ease all;
-  }
+  
 
   @media (max-width: 767px) {
     body{
