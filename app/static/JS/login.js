@@ -29,6 +29,7 @@ const matricula = document.getElementById('matricula')
 const contraseña = document.getElementById('contraseña')
 const labelTwo = document.getElementById('label-two')
 const labelOne = document.getElementById('label-one')
+const labelthree = document.getElementById('label-three')
 
 enviar.addEventListener('click' , (event) =>{
 
@@ -39,6 +40,7 @@ enviar.addEventListener('click' , (event) =>{
         labelOne.textContent = 'Campo Vacio'
         matricula.style.borderColor = 'red'
         event.preventDefault()
+        labelthree.textContent = ''
     }
         
     if(contraseña.value.trim() === ''){
