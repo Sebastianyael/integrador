@@ -1,6 +1,5 @@
-
 const textCard = document.getElementById('text-card')
-const text = "Hola y Bienvenido al sistema de ReNova UTVTiuwhhucferncf sedfnerwiucfjeirc ewronfineiuwrjnfc wierjfniuerwnf wieufniewunf wiuefbiuerncf iwuenfciubnewrc"
+const text = "Hola y Bienvenido al sistema de ReNova UTVT"
 const speed = 34
 let i = 0
 
@@ -15,7 +14,6 @@ function type(){
 type()
 
 
-
 const closeButton = document.getElementById('close-button') 
 
 closeButton.addEventListener('click' , () =>{
@@ -27,12 +25,13 @@ closeButton.addEventListener('click' , () =>{
 
 
 const enviar = document.getElementById('enviar')
+const matricula = document.getElementById('matricula')
+const contraseña = document.getElementById('contraseña')
+const labelTwo = document.getElementById('label-two')
+const labelOne = document.getElementById('label-one')
+const labelthree = document.getElementById('label-three')
 
 enviar.addEventListener('click' , (event) =>{
-    const matricula = document.getElementById('matricula')
-    const contraseña = document.getElementById('contraseña')
-    const labelTwo = document.getElementById('label-two')
-    const labelOne = document.getElementById('label-one')
 
     labelOne.innerText = ''
     labelTwo.innerText = ''
@@ -41,6 +40,7 @@ enviar.addEventListener('click' , (event) =>{
         labelOne.textContent = 'Campo Vacio'
         matricula.style.borderColor = 'red'
         event.preventDefault()
+        labelthree.textContent = ''
     }
         
     if(contraseña.value.trim() === ''){
@@ -52,3 +52,18 @@ enviar.addEventListener('click' , (event) =>{
         contraseña.style.borderColor = ''
     }
 })
+
+
+
+const userNotFound = document.getElementById('userNotFound')
+
+matricula.addEventListener('focus' , () =>{
+    labelOne.innerHTML = ''
+    matricula.style.borderColor = 'green'
+})
+
+contraseña.addEventListener('focus' , () =>{
+    labelTwo.innerHTML = ''
+    contraseña.style.borderColor = 'green'
+})
+

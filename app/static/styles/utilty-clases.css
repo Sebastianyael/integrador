@@ -6,6 +6,11 @@
     display: none;
 }
 
-.th-heigth{
-    height: 5vh !important;
+.center{
+    align-items: center;
+    justify-content: center;
+}
+
+.on-flex{
+    display: flex;
 }

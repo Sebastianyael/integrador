@@ -13,13 +13,21 @@
     </header>
 </head>
 <body>
+    
     <div class="space" >
         <div class="card">
             <div class="login">
                 <p>Inicio de Sesion</p>
                 <img src="{{ url_for('static', filename='images/user.avif') }}" alt="">
-                <form action="/main-feed" method="post" id="form">
+                <form action="{{ url_for('feed') }}" method="post" id="form">
                     <label for="" id="label-one"></label>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <label class="{{ category }}" id="label-three">{{ message }}</label>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
                     <br>
                     <i class="fa-regular fa-user icon-color"></i>
                     <input type="number" placeholder="Matricula" name="mat" id="matricula" >
@@ -35,7 +43,7 @@
                 </form>
             </div>
 
-            <div class="carrusel" id="carrusel">
+            <div class="carrusel">
                 <img id="carrusel" src="{{ url_for('static', filename = 'images/utvt1.jpg') }}">
             </div>
 

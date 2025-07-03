@@ -1,9 +1,10 @@
 :root {
       --fuente: "Roboto", sans-serif;
       --color-font-white: white;
-      --bg-color: rgb(214, 245, 224);
+      --bg-color: rgb(242, 239, 239);
       --bx-shadow : 1px 6px 6px -1px rgb(156, 153, 153);
       --font-color-estado: rgb(36, 163, 74);
+      --feedContainerWidth: 1 / 12;
     
     }
 
@@ -30,6 +31,10 @@
       position: relative;
       box-shadow: var(--bx-shadow);
       border-radius: 20px;
+      display: flex;
+      justify-content: flex-start;
+      padding-left: 10px;
+      align-items: center;
     }
 
     aside {
@@ -42,6 +47,7 @@
       box-shadow: var(--bx-shadow);
       background-color: var(--color-font-white);
       margin: 10px;
+      position:relative;
     }
 
     aside button {
@@ -78,17 +84,19 @@
     }
 
     .feed-container {
-      grid-column: 3 / 12;
+      grid-column: var(--feedContainerWidth);
       grid-row: 2 / 11;
       overflow: hidden;
-      background-color: var(--color-font-white);
       border-radius: 10px;
       display: none;
       grid-template-columns: repeat(60 , 20px);
       grid-template-rows: repeat(36 , 20px);
       padding: 10px;
-      background-color: transparent;
+      background-color: transparent; 
+      
+      
     }
+    
 
     .feed-container div{
       box-shadow: var(--bx-shadow);
@@ -97,64 +105,79 @@
       display: flex;
       flex-direction: column;
       font-family: var(--fuente);
-      color: #404040;
       gap: 5px;
       justify-content: end;
       overflow: hidden;
-      background-color: white;
+      position: relative;
+      background-size: cover;   /* Hace que la imagen cubra todo el div */
+      background-position: center; /* Centra la imagen */
+      background-repeat: no-repeat; 
+      width: 100%; 
+      color: var(--color-font-white);
     }
+
     
     .feed-container h1{
       font-size: 25px;
       transform: translateY(0px);
+      color: var(--color-font-white);
+      
     }
 
     .feed-container h2{
       font-size: 17px;
-      color: #AAAAAA;
       transform: translateY(0px);
+      
       
     }
 
     .feed-container i{
       font-size: 40px;
       transform: translateY(0px);
+      
     }
 
     .feed-container button{
       font-size: 15px;
-      transform: translateY(40px);
+      transform: translateY(50px);
       transition: 0.4s ease all;
       border: none;
       width: 30%;
       height: 4vh;
       font-family: var(--fuente);
+      
     }
 
     .horario{
-        grid-column: 3 / 20;
+        grid-column: 3 / 25;
         grid-row: 5 / 21;
+        background-image: url("/static/images/hor.webp");
+        color: var(--color-font-white) !important;
     }
 
     .calificaciones{
-        grid-column: 22 / 41;
+        grid-column: 29 / 50;
         grid-row: 5 / 30;
+        background-image: url("/static/images/cal.webp");
     }
 
 
     .calendario{
-        grid-column: 42 / 60;
+        grid-column: 55 / 70;
         grid-row: 5 / 15;
+        background-image: url("/static/images/calen.webp");
     }
 
     .profesores{
-        grid-column: 3 / 21;
+        grid-column: 3 / 25;
         grid-row: 22 / 30;
+        background-image: url("/static/images/prof.webp");
     }
 
     .student-info{
-      grid-column: 42 / 61;
-      grid-row: 16 / 30;
+      grid-column: 55 / 70;
+      grid-row: 17 / 30;
+      background-image: url("/static/images/estudent.webp");
     }
 
     .feed-container div:hover i{
@@ -182,13 +205,15 @@
     .feed-container div:hover{
       background-color: rgb(243, 241, 241);
       transition: 0.4s ease-in all;
-      color: #56ab2f;
+      opacity: 0.8;
     }
 
     .feed-container button:hover{
       cursor: pointer;
 
     }
+
+    
 
     .calificaciones-panel{
       grid-column: 3 / 12;
@@ -508,6 +533,8 @@
     position: relative;
 
   }
+
+  
 
   @media (max-width: 767px) {
     body{
