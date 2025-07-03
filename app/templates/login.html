@@ -24,7 +24,7 @@
                     {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                     {% for category, message in messages %}
-                    <label class="{{ category }}" id="userNotFound">{{ message }}</label>
+                    <label class="{{ category }}" id="label-three">{{ message }}</label>
                     {% endfor %}
                     {% endif %}
                     {% endwith %}
