@@ -3,6 +3,7 @@ from flask_pymongo import PyMongo
 import os
 
 app = Flask(__name__)
+app.secret_key = '123'
 
 app.config["MONGO_URI"] = 'mongodb+srv://sebastianyael963:ViHNAGbZRL9@integradora.onlvtmq.mongodb.net/integradora?retryWrites=true&w=majority&appName=Integradora'
 mongo = PyMongo(app)
@@ -36,6 +37,10 @@ def feed():
 def main_feed_view():
     return render_template('main-feed.html')
 
+@app.route('/exit' , methods = ['POST'])
+def exit():
+    return redirect(url_for('login'))
 
 if(__name__ == '__main__'):
     app.run(debug = True , host='0.0.0.0' , port=int(os.environ.get('PORT' , 5000)))
+    app.run(debug = True)

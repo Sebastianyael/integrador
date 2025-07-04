@@ -11,9 +11,11 @@
     <title>Document</title>
 </head>
 <body >
-    <header class="">
+    <header >
         <button class="bars center" id="bars"><i class="fa-solid fa-bars " id="icon-bars"></i></button>
-
+        <form action="/exit" method="post">
+            <button class="exit" name="exit"><i class="fa-solid fa-person-walking-arrow-right"></i></button>
+        </form>
     </header>
 
     <aside class="off" id="aside">
@@ -44,40 +46,37 @@
 
     </aside>
 
-    <div class="feed-container on" id="feed-container">
-        <div class="calificaciones" id="calificaciones-card">
-            
+    <div class="feed-container on " id="feed-container">
+        <div class="calificaciones fondo1" id="calificaciones-card">
             <i class="fa-solid fa-pen-nib"></i>
             <h1>Calificaciones</h1>
             <h2>Aqui encontraras tus calificaciones</h2>
-            <Button>Vamos</Button>
-
+            <Button id="card-calificaciones">Vamos</Button>
         </div>
 
-        <div class="horario" id="horario-card">
+        <div class="horario fondo2" id="horario-card">
             <i class="fa-solid fa-clock"></i>
             <h1>Mi Horario</h1>
             <h2>Tiempo de clase</h2>
-            <Button>Vamos</Button>
-
+            <Button id="cardh">Vamos</Button>
         </div>
 
-        <div class="calendario" id="calendario-card">
+        <div class="calendario fondo3" id="calendario-card">
             <i class="fa-solid fa-calendar-days"></i>
             <h1>Calendario</h1>
             <h2>Fechas Importantes</h2>
-            <Button>Vamos</Button>
+            <Button id="card-calendario">Vamos</Button>
 
         </div>
 
-        <div class="profesores" id="profesores-card">
+        <div class="profesores fondo4" id="profesores-card">
             <i class="fa-solid fa-user-tie"></i>
             <h1>Profesores</h1>
             <h2>Los mejores en su area</h2>
-            <Button>Vamos</Button>
+            <Button id="card-profesores">Vamos</Button>
         </div>
 
-        <div class="student-info" id="student-card">
+        <div class="student-info fondo5" id="student-card">
             <i class="fa-solid fa-school"></i>
             <h1>Tu</h1>
             <h2>Informacion personal</h2>
@@ -402,24 +401,6 @@
     </div>
 
     <div class="feed-teacher off" id="feed-teacher">
-        <section class="feed-teacher__card">
-            <div class="cortina">
-            </div>
-            <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
-            <h1>Dr.Norma Maya</h1>
-            <p>Especialidad en Redes</p>
-            <p>al1312321.@gmail.com</p>
-            <p>1qs32dSm</p>
-        </section>
-        <section class="feed-teacher__card">
-            <div class="cortina">
-            </div>
-            <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
-            <h1>Dr.Norma Maya</h1>
-            <p>Especialidad en Redes</p>
-            <p>al1312321.@gmail.com</p>
-            <p>1qs32dSm</p>
-        </section>
         <section class="feed-teacher__card">
             <div class="cortina">
             </div>
