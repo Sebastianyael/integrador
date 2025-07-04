@@ -23,6 +23,10 @@ let varBackground = document.documentElement;
 let colorClassEstado = document.documentElement;
 let feedContainerWidth = document.documentElement;
 
+const cardCalificaciones = document.getElementById('card-calificaciones')
+const cardh =  document.getElementById('cardh')
+const cardProfesores = document.getElementById('card-profesores')
+const cardCalendario = document.getElementById('card-calendario')
 
 
 //Funcion que limpia el body y pone el feed que  corresponda
@@ -72,10 +76,21 @@ home.addEventListener('click' , () => {
 
 
 
+
+
 //Boton de calificaciones
 calificaciones.addEventListener('click' , () =>{
     cleanMain(feedNotes)
     classEstado(calificaciones)
+    varBackground.style.setProperty('--bg-color' , 'rgb(212, 232, 247)')
+    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(67, 101, 127)')
+    buttonAside.classList.add('off')
+})
+
+cardCalificaciones.addEventListener('click' , () => {
+    cleanMain(feedNotes)
+    classEstado(calificaciones)
+    aside.classList.replace('off' , 'on-flex')
     varBackground.style.setProperty('--bg-color' , 'rgb(212, 232, 247)')
     colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(67, 101, 127)')
     buttonAside.classList.add('off')
@@ -93,6 +108,17 @@ horario.addEventListener('click' , () =>{
 
 })
 
+cardh.addEventListener('click' , () =>{
+    cleanMain(feedHorario)
+    classEstado(horario)
+    varBackground.style.setProperty('--bg-color' , 'rgb(247, 228, 212)')
+    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(210, 121, 47)')
+    buttonAside.classList.add('off')
+    aside.classList.replace('off' , 'on-flex')
+
+    
+})
+
 //boton de calendario
 calendario.addEventListener('click' , () =>{
     cleanMain(feedCalendario)
@@ -102,6 +128,15 @@ calendario.addEventListener('click' , () =>{
     buttonAside.classList.add('off')
 })
 
+cardCalendario.addEventListener('click' , () =>{
+    cleanMain(feedCalendario)
+    classEstado(calendario)
+    varBackground.style.setProperty('--bg-color' , 'rgb(228, 212, 247)')
+    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(108, 80, 143)')
+    buttonAside.classList.add('off')
+    aside.classList.replace('off' , 'on-flex')
+})
+
 //Boton de profesores
 profesores.addEventListener('click' , () =>{
     cleanMain(feedTeacher)
@@ -109,6 +144,15 @@ profesores.addEventListener('click' , () =>{
     varBackground.style.setProperty('--bg-color' , 'rgb(247, 244, 212)')
     colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(83, 80, 38)')
     buttonAside.classList.add('off')
+})
+
+cardProfesores.addEventListener('click' , () =>{
+    cleanMain(feedTeacher)
+    classEstado(profesores)
+    varBackground.style.setProperty('--bg-color' , 'rgb(247, 244, 212)')
+    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(83, 80, 38)')
+    buttonAside.classList.add('off')
+    aside.classList.replace('off' , 'on-flex')
 })
 
 document.addEventListener("DOMContentLoaded", function () {

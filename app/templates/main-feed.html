@@ -13,7 +13,9 @@
 <body >
     <header >
         <button class="bars center" id="bars"><i class="fa-solid fa-bars " id="icon-bars"></i></button>
-        <button class="exit"><i class="fa-solid fa-person-walking-arrow-right"></i></button>
+        <form action="/exit" method="post">
+            <button class="exit" name="exit"><i class="fa-solid fa-person-walking-arrow-right"></i></button>
+        </form>
     </header>
 
     <aside class="off" id="aside">
@@ -49,21 +51,21 @@
             <i class="fa-solid fa-pen-nib"></i>
             <h1>Calificaciones</h1>
             <h2>Aqui encontraras tus calificaciones</h2>
-            <Button>Vamos</Button>
+            <Button id="card-calificaciones">Vamos</Button>
         </div>
 
         <div class="horario fondo2" id="horario-card">
             <i class="fa-solid fa-clock"></i>
             <h1>Mi Horario</h1>
             <h2>Tiempo de clase</h2>
-            <Button>Vamos</Button>
+            <Button id="cardh">Vamos</Button>
         </div>
 
         <div class="calendario fondo3" id="calendario-card">
             <i class="fa-solid fa-calendar-days"></i>
             <h1>Calendario</h1>
             <h2>Fechas Importantes</h2>
-            <Button>Vamos</Button>
+            <Button id="card-calendario">Vamos</Button>
 
         </div>
 
@@ -71,7 +73,7 @@
             <i class="fa-solid fa-user-tie"></i>
             <h1>Profesores</h1>
             <h2>Los mejores en su area</h2>
-            <Button>Vamos</Button>
+            <Button id="card-profesores">Vamos</Button>
         </div>
 
         <div class="student-info fondo5" id="student-card">
