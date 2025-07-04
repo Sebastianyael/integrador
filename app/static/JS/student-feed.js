@@ -110,3 +110,97 @@ profesores.addEventListener('click' , () =>{
     colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(83, 80, 38)')
     buttonAside.classList.add('off')
 })
+
+document.addEventListener("DOMContentLoaded", function () {
+    let fondos = document.querySelectorAll('.fondo1');
+
+    let observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let fondo = entry.target;
+                fondo.style.backgroundImage = `url('/static/images/cal.webp')`;
+                observer.unobserve(fondo); // Deja de observar después de cargar
+            }
+        });
+    });
+
+    fondos.forEach(fondo => {
+        observer.observe(fondo);
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let fondos = document.querySelectorAll('.fondo2');
+
+    let observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let fondo = entry.target;
+                fondo.style.backgroundImage = `url('/static/images/hor.webp')`;
+                observer.unobserve(fondo); // Deja de observar después de cargar
+            }
+        });
+    });
+
+    fondos.forEach(fondo => {
+        observer.observe(fondo);
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let fondos = document.querySelectorAll('.fondo3');
+
+    let observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let fondo = entry.target;
+                fondo.style.backgroundImage = `url('/static/images/calen.webp')`;
+                observer.unobserve(fondo); // Deja de observar después de cargar
+            }
+        });
+    });
+
+    fondos.forEach(fondo => {
+        observer.observe(fondo);
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let fondos = document.querySelectorAll('.fondo4');
+
+    let observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let fondo = entry.target;
+                fondo.style.backgroundImage = `url('/static/images/prof.webp')`;
+                observer.unobserve(fondo); // Deja de observar después de cargar
+            }
+        });
+    });
+
+    fondos.forEach(fondo => {
+        observer.observe(fondo);
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let fondos = document.querySelectorAll('.fondo5');
+
+    let observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let fondo = entry.target;
+                fondo.style.backgroundImage = `url('/static/images/estudent.webp')`;
+                observer.unobserve(fondo); // Deja de observar después de cargar
+            }
+        });
+    });
+
+    fondos.forEach(fondo => {
+        observer.observe(fondo);
+    });
+});
