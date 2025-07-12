@@ -56,7 +56,7 @@ buttonAside.addEventListener('click' , () =>{
 
 //Funci0n que pone el color al boton del aside 
 function classEstado(button){
-     position = asideButtons.findIndex(a => a.classList.contains('estado') === true)
+     let position = asideButtons.findIndex(a => a.classList.contains('estado') === true)
      asideButtons[position].classList.remove('estado')
      button.classList.add('estado')
 }
