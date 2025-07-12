@@ -1,46 +1,46 @@
-from flask import Flask , render_template , request , redirect , url_for , session , flash
-from flask_pymongo import PyMongo
-import os
+from flask import Flask , render_template , flash , redirect , url_for
+from flask import Flask , render_template , request
+from flask_mysqldb import MySQL 
 
 app = Flask(__name__)
+
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'prueba'
+
+conexion = MySQL(app)
 app.secret_key = '123'
 
-app.config["MONGO_URI"] = 'mongodb+srv://sebastianyael963:ViHNAGbZRL9@integradora.onlvtmq.mongodb.net/integradora?retryWrites=true&w=majority&appName=Integradora'
-mongo = PyMongo(app)
-app.secret_key = 'sebas'
 
-@app.route('/' , methods = ['GET'])
-def login():
+@app.route('/')
+def index():
     return render_template('login.html')
 
 
-@app.route('/main-feed', methods=[ 'POST'])
+@app.route('/main-feed' , methods = ['POST'])
 def feed():
-    
-    matricula = int(request.form['mat'].strip())
-    contraseña = request.form['contraseña'].strip()
+    try:
+        matricula = request.form['matricula']
+        contraseña = request.form['contraseña']
 
-    print(f'Matrícula recibida: {matricula}')
-    print(f'Contraseña recibida: {contraseña}')
-
-
-    usuario = mongo.db.usuarios.find_one({'matricula': matricula, 'contraseña': contraseña})
-    print(usuario)
-    if usuario:
-        return  redirect(url_for('main_feed_view'))
-    else:
-        flash('Usuario no encontrado')
-        return redirect(url_for('login'))
+        cursor = conexion.connection.cursor()
+        query = "SELECT * FROM login WHERE matricula = %s AND contraseña = %s"
+        cursor.execute(query , (matricula , contraseña))
+        result = cursor.fetchone()
+        if result:
+            return render_template('main-feed.html')
+        else:
+            flash('Usuario no encontrado')
+            return render_template('login.html')
         
+    except Exception as e:
+        return f"❌ Error de conexión: {str(e)}"
     
-@app.route('/feed', methods=['GET'])
-def main_feed_view():
-    return render_template('main-feed.html')
-
 @app.route('/exit' , methods = ['POST'])
 def exit():
-    return redirect(url_for('login'))
+    return render_template('login.html')
+
 
 if(__name__ == '__main__'):
-    app.run(debug = True , host='0.0.0.0' , port=int(os.environ.get('PORT' , 5000)))
     app.run(debug = True)
