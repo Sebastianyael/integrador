@@ -113,12 +113,10 @@
       grid-row: 2 / 11;
       overflow: hidden;
       border-radius: 10px;
-      display: none;
       grid-template-columns: repeat(60 , 20px);
       grid-template-rows: repeat(36 , 20px);
       padding: 10px;
       background-color: transparent; 
-      
       
     }
     
@@ -576,11 +574,46 @@
     aside{
       display: none;
     }
-    
+
+    .calificaciones-panel{
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 20px !important;
+    } 
+
+    .panel-info {
+      display: flex;
+      flex-direction: column;
+      padding: 5px;
+    }
+
+    .panel-info img{
+      display: none;
+    }
+
+    .resumen-academico{
+      padding: 10px;
+    }
+    .resumen-academico div{
+      height: 150px !important;
+    }
+
+    .notes-container{
+      display: flex;
+      flex-direction: column;
+      width: 1000px;
+    }
+
     .feed-container{
       display: flex !important;
       flex-direction: column;
       gap: 5px;
+    }
+
+    
+    .feed-teacher section{
+      width: 200px;
+      
     }
     
     .feed-container h1, i{
@@ -591,8 +624,26 @@
     font-size: 10px;
    }
 
-    
+   .horario-container{
+    width: 100% !important;
+    gap: 10px ;
+   }
+
+   .datos-horario{
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column;
+   }
+  
+   .horario-table-container{
+    width: 100% !important;
   }
+    
+
+   }
+
+    
+  
 
   
 
