@@ -23,6 +23,7 @@ let varBackground = document.documentElement;
 let colorClassEstado = document.documentElement;
 let feedContainerWidth = document.documentElement;
 
+//botones de las cards
 const cardCalificaciones = document.getElementById('card-calificaciones')
 const cardh =  document.getElementById('cardh')
 const cardProfesores = document.getElementById('card-profesores')
@@ -44,7 +45,7 @@ buttonAside.addEventListener('click' , () =>{
         aside.classList.replace('off' , 'on-flex')
         feedContainerWidth.style.setProperty('--feedContainerWidth' , '3/11')
         iconBars.classList.replace('fa-bars' , 'fa-bars-staggered')
-        
+            
     }else{
         aside.classList.replace('on-flex' , 'off')
         feedContainerWidth.style.setProperty('--feedContainerWidth' , '1/12')
@@ -54,7 +55,7 @@ buttonAside.addEventListener('click' , () =>{
 })
 
 
-//Funci0n que pone el color al boton del aside 
+//Funcion que pone el color al boton del aside 
 function classEstado(button){
      let position = asideButtons.findIndex(a => a.classList.contains('estado') === true)
      asideButtons[position].classList.remove('estado')
@@ -75,25 +76,26 @@ home.addEventListener('click' , () => {
 })
 
 
-
-
-
 //Boton de calificaciones
 calificaciones.addEventListener('click' , () =>{
     cleanMain(feedNotes)
     classEstado(calificaciones)
-    varBackground.style.setProperty('--bg-color' , 'rgb(212, 232, 247)')
-    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(67, 101, 127)')
+    
     buttonAside.classList.add('off')
 })
 
 cardCalificaciones.addEventListener('click' , () => {
     cleanMain(feedNotes)
     classEstado(calificaciones)
-    aside.classList.replace('off' , 'on-flex')
-    varBackground.style.setProperty('--bg-color' , 'rgb(212, 232, 247)')
-    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(67, 101, 127)')
-    buttonAside.classList.add('off')
+    
+    if(window.innerWidth  > 767){
+        aside.classList.replace('off' , 'on-flex')
+        
+        buttonAside.classList.add('off')
+    }   
+    else{
+        buttonAside.classList.add('on')
+    }
 })
 
 
@@ -101,8 +103,7 @@ cardCalificaciones.addEventListener('click' , () => {
 horario.addEventListener('click' , () =>{
     cleanMain(feedHorario)
     classEstado(horario)
-    varBackground.style.setProperty('--bg-color' , 'rgb(247, 228, 212)')
-    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(210, 121, 47)')
+  
     buttonAside.classList.add('off')
     
 
@@ -111,10 +112,15 @@ horario.addEventListener('click' , () =>{
 cardh.addEventListener('click' , () =>{
     cleanMain(feedHorario)
     classEstado(horario)
-    varBackground.style.setProperty('--bg-color' , 'rgb(247, 228, 212)')
-    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(210, 121, 47)')
-    buttonAside.classList.add('off')
-    aside.classList.replace('off' , 'on-flex')
+    if(window.innerWidth > 757){
+        
+        
+        buttonAside.classList.add('off')
+        aside.classList.replace('off' , 'on-flex')
+    }
+    else{
+        buttonAside.classList.add('on')
+    }
 
     
 })
@@ -123,36 +129,44 @@ cardh.addEventListener('click' , () =>{
 calendario.addEventListener('click' , () =>{
     cleanMain(feedCalendario)
     classEstado(calendario)
-    varBackground.style.setProperty('--bg-color' , 'rgb(228, 212, 247)')
-    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(108, 80, 143)')
+    
     buttonAside.classList.add('off')
 })
 
 cardCalendario.addEventListener('click' , () =>{
     cleanMain(feedCalendario)
     classEstado(calendario)
-    varBackground.style.setProperty('--bg-color' , 'rgb(228, 212, 247)')
-    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(108, 80, 143)')
-    buttonAside.classList.add('off')
-    aside.classList.replace('off' , 'on-flex')
+    if(window.innerWidth > 767){
+        
+        buttonAside.classList.add('off')
+        aside.classList.replace('off' , 'on-flex')
+    }
+    else{
+        buttonAside.classList.add('on')
+    }
+    
 })
 
 //Boton de profesores
 profesores.addEventListener('click' , () =>{
     cleanMain(feedTeacher)
     classEstado(profesores)
-    varBackground.style.setProperty('--bg-color' , 'rgb(247, 244, 212)')
-    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(83, 80, 38)')
+   
     buttonAside.classList.add('off')
 })
 
 cardProfesores.addEventListener('click' , () =>{
+    
     cleanMain(feedTeacher)
     classEstado(profesores)
-    varBackground.style.setProperty('--bg-color' , 'rgb(247, 244, 212)')
-    colorClassEstado.style.setProperty('--font-color-estado' , 'rgb(83, 80, 38)')
-    buttonAside.classList.add('off')
-    aside.classList.replace('off' , 'on-flex')
+    if(window.innerWidth > 767){
+        
+        buttonAside.classList.add('off')
+        aside.classList.replace('off' , 'on-flex')
+    }else{
+        buttonAside.classList.add('on')
+    }
+    
 })
 
 document.addEventListener("DOMContentLoaded", function () {

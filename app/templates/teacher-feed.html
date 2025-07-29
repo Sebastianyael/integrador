@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static' , filename = 'styles/teacher-feed.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/utilty-clases.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="{{url_for('static' , filename='JS/teacher-feed.js')}}" defer></script>
+</head>
+<body>
+    <header>
+        <img src="{{url_for('static' , filename = 'images/logo.png')}}" alt="">
+        <p>ReNova UTVT</p>
+        <form action="/exit" method="post">
+            <button class="exit" name="exit"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+        </form>
+    </header>
+
+    <div class="buscador">
+        <p>Buscar Alumnos</p>
+        <form action="/buscar" method="post">
+            <input type="text" placeholder="Buscar por matricula" name = 'matricula' >
+            <button type="submit" id="buscar-alumno-button">Buscar</button>
+        </form>
+        <p>Resultados:</p>
+
+        <div class="resultado">
+            <div class="registro  {{estado}} " id="registro-container">
+                <button id="inscribir-alumno"><i class="fa-solid fa-user"></i></button>
+                
+                <p id="p-matricula-alumno">{{mat}}</p>
+                <p>{{nombre}}</p>
+                <p>{{apellidoPaterno}}</p>
+                <p>{{apellidoMaterno}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grupos">
+        <div class="container-top">
+            <p>Grupos</p>
+            <div class="top-left">
+                <button class="crear" id="crear"> 
+                    <i class="fa-solid fa-plus"></i>
+                    <p id="p-text">Crear</p>
+                </button>
+            </div>
+        </div>
+
+        <div class="grupos-resultados" id="grupos-resultados">
+            
+
+        </div>
+
+    </div>
+
+
+    <div class="alumnos" id="alumnos">
+
+    </div>
+
+
+    <div class="modal close-modal " id="modal">
+       <div class="modal-card close-card on" id="modal-card"> 
+
+         <div class="form-div-top contenido_carta">
+            <i class="fa-regular fa-user" id="i-tittle"></i>
+            <p id="p-tittle">Nuevo Grupo</p>
+         </div>
+            
+            <form action="" id="form" class="form contenido_carta" method="post">
+                
+                <p class="nombre-grupo">Nombre del Grupo</p>
+                <input type="text" name="nombre_grupo" class="input-uno" placeholder="Grupo" id="nombre-input" required>
+
+                <p class="ciclo-escolar">Cuatrimestre</p>
+                <select name="cuatrimestre" class="input-dos" id="cuatrimestre-select" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="Primero">Primero</option>
+                    <option value="Segundo">Segundo</option>
+                    <option value="Tercero">Tercero</option>
+                    <option value="Cuarto">Cuarto</option>
+                    <option value="Quinto">Quinto</option>
+                    <option value="Sexto">Sexto</option>
+                    <option value="Septimo">Septimo</option>
+                    <option value="Octavo">Octavo</option>
+                    <option value="Noveno">Noveno</option>
+                    <option value="Decimo">Decimo</option>
+                </select>
+
+                
+                
+                <p class="grado-escolar">Año Escolar</p>
+                <input type="number" name="año_escolar" class="input-cuatro" placeholder="Año" id="año-input" required>
+
+                <p class="Materia">Materia</p>
+                <select name="materia" id="materia-input" class="input-cinco">
+                    <Option>Selecciona una opcion</Option>
+                </select>
+
+                <p class="salon">Salon</p>
+                <select name="salon" id="salon-select" class="input-tres"  required>
+                    <option value="">Seleccione una opcion</option>
+                    <option value="salon-1">Salon 1</option>
+                    <option value="salon-2">Salon 2</option>
+                    <option value="salon3">Salon 3</option>
+                    <option value="laboratorio-1">Laboratorio 1</option>
+                    <option value="laboratorio-2">Laboratorio 2</option>
+                    <option value="laboratorio-3">Laboratorio 3</option>
+                </select>
+                <button  type="button" class="cancelar" id="cancelar">
+                    Cancelar
+                </button>
+
+                <button type="submit" id="enviar" class="crear boton2 on-flex">
+                    <i class="fa-solid fa-plus" id="enviar-button-i"></i>
+                    <p id="enviar-button-p">Crear Grupo</p>
+                </button>
+
+
+                
+                <button type="submit" id="actualizar" class="crear boton2 off">
+                    <i class="fa-solid fa-pencil" id="enviar-button-i"></i>
+                    <p id="enviar-button-p">Actualizar</p>
+                </button>
+                
+        </form>
+       </div>
+
+
+       <div class="div-del-form-para-inscribir off open-card" id="div-del-form-para-inscribir">
+            <p>Ingresa el id del grupo</p>
+            <label for="" id="label-error"></label>
+            <input type="number" id="input-nombre-del-grupo">
+
+            <button id="inscribir" class="crear">Inscribir</button>
+
+            <button  type="button" class="cancelar" id="cancelar-div">
+                    Cancelar
+            </button>
+        </div>
+
+        <div class=" off subir-calificaciones" id="div-del-form-para-subir-calificaciones">
+            <div class="form-div-top contenido_carta">
+                <i class="fa-solid fa-star"></i>
+                <p id="p-tittle">Subir Calificaciones</p>
+             </div>
+
+            <form action="">
+                <p class="">Primer Parcial</p>
+                <input type="number" id="primer-parcial" step="any" required >
+
+                <p class="">Segundo Parcial</p>
+                <input type="number" id="segundo-parcial" step="any" required  >
+
+                <p class="">Tercer Parcial</p>
+                <input type="number" id="tercer-parcial" step="any" required >
+
+                <p class="">Examen Extraordinario</p>
+                <input type="number" id="examen-extraordinario" step="any" required >
+
+                <p class="">Calificacion Final</p>
+                <input type="number" id="calificacion-final" step="any" required>
+            
+                <div class="div-bottom-form-calificaciones">
+                    <button  type="button" class="cancelar" id="cancelar-div-calificaciones">
+                        Cancelar
+                    </button>
+
+                    <button type="" id="subir" class="crear boton2 on-flex subir">
+                        
+                        <p id="enviar-button-p">Subir</p>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+    
+</body>
+</html>
