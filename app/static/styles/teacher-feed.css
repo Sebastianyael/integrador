@@ -39,12 +39,11 @@ header{
     padding: var(--padding);
     grid-row: 1 / 3;
     grid-column: 1 / 21;
-    
     background-color: var(--white);
     display: flex;
     justify-content: space-between;
-    background-color: #15803D;
-    color: white;
+    color: black;
+    box-shadow: var(--bx-shadow);
 }
 
 header p{
@@ -68,7 +67,8 @@ header img{
 header button{
     font-size: var(--tittleSize);
     color: white;
-    transition: var(--transitionButton)
+    transition: var(--transitionButton);
+    color: black;
 }
 
 header button:hover{
@@ -183,7 +183,7 @@ header button:hover{
     }
 
 .grupos{
-    grid-column: 2 / 13;
+    grid-column: 1 / 13;
     grid-row: 4 / 20;
     background-color: var(--white);
     box-shadow: var(--bx-shadow);
@@ -235,7 +235,7 @@ header button:hover{
 
 
     .eliminar{
-        width:5%;
+        width:4%;
         height: 4vh;
         background-color: rgb(230, 62, 62);
         color: white;
@@ -540,10 +540,7 @@ header button:hover{
     border-radius: var(--borderRadius);
 }
 
-.div-del-form-para-inscribir form{
-    width: 10%;
-    height: 5vh;
-}
+
 
 .subir-calificaciones{
     width: 40%;
@@ -557,18 +554,12 @@ header button:hover{
     padding: var(--padding);
 }
 
-.subir-calificaciones form{
-    width: 100%;
-    height: 60vh;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
+
 
 .subir-calificaciones form p{
     font-size: 17px;
     font-family: Arial, Helvetica, sans-serif;
+    
 
 }
 
@@ -599,6 +590,24 @@ header button:hover{
         align-items: center;
         justify-content: center;
     }
+
+.pdf-button{
+    width: 5%;
+    height: 5vh;
+    border-radius: var(--borderRadius);
+    font-size: var(--tittleSize);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #166534;
+    transition: var(--transitionButton)
+}
+
+.pdf-button:hover{
+    transform: translateY(-7px);
+    transition: var(--transitionButton);
+    cursor: pointer;
+}
 
 
 

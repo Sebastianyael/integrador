@@ -186,10 +186,9 @@ function editGroup(grupo) {
 
 
 /*Funcion que elimina un grupo cuando se da click en el boton rojo 
-cuando se da click a ese boton se envia a una ruta flask /grupo/eliminar  el id del grupo a eliminar
+cuando se da click a ese boton se envia a una ruta flask /grupo/eliminar con el id del grupo a eliminar
 */
 function deleteGroup(grupoId){
-        // aqui la logica para elñ fetch y mandarle al back el id del registro a eliminar
         fetch('/grupo/eliminar', {
             method: 'DELETE',
             headers: {
@@ -241,16 +240,20 @@ addEventListener('DOMContentLoaded' , () =>{
                 const pencil = document.createElement('i')
                 const eliminarButton = document.createElement('button')
                 const xIcon = document.createElement('i')
-                const arrow = document.createElement('i')
+                const arrow = document.createElement('button')
                 const arrowIcon = document.createElement('i')
                 arrowIcon.classList.add('fa-solid')
-                arrowIcon.classList.add('fa-arrow-down')
+                arrowIcon.classList.add('fa-file')
+                arrow.className = 'pdf-button'
                 arrow.appendChild(arrowIcon)
                 arrow.id = 'arrow-button'
+                arrow.addEventListener('click' , () =>{
+                    descargarPDF(grupo.id)
+                })
                 const idGrupo = document.createElement('p')
                 idGrupo.textContent = grupo.id
 
-                arrow.addEventListener('click' , () =>{
+                div.addEventListener('click' , () =>{
                     alumnos.innerHTML = ''
                     alumnosEnGrupo(grupo.id , grupo.materia , grupo.cuatrimestre)
                     
@@ -286,8 +289,8 @@ addEventListener('DOMContentLoaded' , () =>{
                 div.appendChild(añoEscolar)
                 div.appendChild(materia)
                 div.appendChild(updateButton)
-                div.appendChild(eliminarButton) 
-                div.appendChild(arrow) 
+                div.appendChild(arrow)
+                div.appendChild(eliminarButton)  
                 groupDiv.appendChild(div)
                 gruposContainer.appendChild(groupDiv)
                 
@@ -299,7 +302,41 @@ addEventListener('DOMContentLoaded' , () =>{
 })
 
 
-function subirCalificaciones(alumnoMatricula,grupoMateria,cuatrimestre){
+function descargarPDF(id , grupo){
+    fetch('/generar_pdf', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        id: id,
+        grupoFetch: grupo
+    })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al generar el PDF');
+        }
+        return response.blob();  // 👈 respuesta binaria
+    })
+    .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'acta.pdf'; // nombre del archivo descargado
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url); // liberar memoria
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+}
+
+
+function subirCalificaciones(alumnoMatricula,grupoMateria,cuatrimestre,grupoId){
 
     abrirModal()
     abrirDiv(formParaInscribir)
@@ -335,6 +372,7 @@ function subirCalificaciones(alumnoMatricula,grupoMateria,cuatrimestre){
                  matricula: alumnoMatricula,
                  materia:grupoMateria,
                  cuatrimestre:cuatrimestre,
+                 id:grupoId,
                  primerParcial : arrayDeCalificacionesFloat[0],
                  segundoParcial: arrayDeCalificacionesFloat[1],
                  tercerParcial: arrayDeCalificacionesFloat[2],
@@ -346,6 +384,9 @@ function subirCalificaciones(alumnoMatricula,grupoMateria,cuatrimestre){
          .then(response => response.json())
          .catch(error => console.error('Error', error) )
          })
+
+        
+
 
     }
 
@@ -383,7 +424,7 @@ function alumnosEnGrupo(grupoId , grupoMateria,grupoCuatrimestre){
             divAlumno.id = 'div-del-alumno'
 
             divAlumno.addEventListener('click' , () =>{
-                subirCalificaciones(alumno.Matricula,grupoMateria,grupoCuatrimestre)
+                subirCalificaciones(alumno.Matricula,grupoMateria,grupoCuatrimestre,grupoId)
             })
 
             const matricula = document.createElement('p')
