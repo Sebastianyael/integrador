@@ -200,6 +200,7 @@ header button:hover{
         display: flex;
         align-items: center;
         padding: var(--padding);
+        
     }
 
     .top-left{
@@ -208,7 +209,7 @@ header button:hover{
         display: flex;
         justify-content: end;
         align-items: center;
-        margin-left: 60%;
+        margin-left: 25%;
         gap: 10px;
        
     }
@@ -591,7 +592,7 @@ header button:hover{
         justify-content: center;
     }
 
-.pdf-button{
+.pdf-button,.grafica-button{
     width: 5%;
     height: 5vh;
     border-radius: var(--borderRadius);
@@ -603,13 +604,22 @@ header button:hover{
     transition: var(--transitionButton)
 }
 
-.pdf-button:hover{
+.pdf-button:hover,.grafica-button:hover{
     transform: translateY(-7px);
     transition: var(--transitionButton);
     cursor: pointer;
 }
 
-
+.grafica-ventana{
+    width: 50%;
+    height: 50vh;
+    background-color: white;
+    border-radius: var(--borderRadius);
+}
+.grafica-ventana img{
+    width: 100%;
+    height: 45vh;
+}
 
 
 

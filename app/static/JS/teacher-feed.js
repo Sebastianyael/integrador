@@ -11,8 +11,9 @@ let expanded = false
 
 const formParaInscribir = document.getElementById('div-del-form-para-inscribir')
 const divSubirCalificaciones = document.getElementById('div-del-form-para-subir-calificaciones')
+const divDeLaGrafica = document.getElementById('grafica-div')
 
-const formularios = [modalCard,formParaInscribir,divSubirCalificaciones]
+const formularios = [modalCard,formParaInscribir,divSubirCalificaciones,divDeLaGrafica]
 function cleanMain(form,display){
     let position = formularios.findIndex(a => a.classList.contains('on') || a.classList.contains('on-flex') )
     formularios[position].classList.replace('on' , 'off')
@@ -38,8 +39,6 @@ crearButton.addEventListener('click' , (event) =>{
         enviarButton.classList.replace('off' , 'on-flex')
     }
     
-    
-
     const nombreInput = document.getElementById('nombre-input')
     nombreInput.value = ''
 
@@ -54,8 +53,6 @@ crearButton.addEventListener('click' , (event) =>{
 
     const materiaInput = document.getElementById('materia-input')
     materiaInput.value =  ''
-    
-
     const form = document.getElementById('form')
     form.action = '/grupo/crear' 
 
@@ -140,9 +137,9 @@ function editGroup(grupo) {
     
 
     // Cargar datos del grupo
-    nombreInput.value = grupo.nombre;
+    nombreInput.value = grupo.nombreGrupo;
     cuatrimestreSelect.value = grupo.cuatrimestre;
-    añoInput.value = grupo.anio_escolar;
+    añoInput.value = grupo.anioEscolar;
     salonSelect.value = grupo.salon;
     materiaInput.value = grupo.materia;
     console.log(grupo.materia)
@@ -166,7 +163,7 @@ function editGroup(grupo) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id: grupo.id,
+                id: grupo.idGrupo,
                 nombre: nombreInput.value,
                 cuatrimestre: cuatrimestreSelect.value,
                 salon: salonSelect.value,
@@ -201,7 +198,7 @@ function deleteGroup(grupoId){
         .then(res => res.json())
         .then(data => {
             console.log('Grupo eliminado', data);
-            location.reload(); 
+            location.reload(    )
         })
         .catch(error => console.error('Error', error));
 }
@@ -215,6 +212,8 @@ recibe todo en formato json
 
 const alumnos = document.getElementById('alumnos')
 addEventListener('DOMContentLoaded' , () =>{
+    const pGruposDe = document.getElementById('grupos-de')
+    
 
     fetch('/grupo' , {
         method: 'get'
@@ -222,8 +221,11 @@ addEventListener('DOMContentLoaded' , () =>{
         .then(res => res.json())
         .then(grupos => {
             console.log(grupos)
+            
             const gruposContainer = document.getElementById('grupos-resultados')
             grupos.forEach(grupo => {
+                const nombreCompleto = `Grupos de ${grupo.nombre} ${grupo.apellidoPaterno} ${grupo.apellidoMaterno}`
+                pGruposDe.innerText = nombreCompleto
                 const groupDiv = document.createElement('button')
                 groupDiv.className = 'grupos-container'
                 groupDiv.id = 'grupo-div'
@@ -232,6 +234,15 @@ addEventListener('DOMContentLoaded' , () =>{
                 div.className = 'grupos-container2'
 
                 const nombre = document.createElement('p')
+                const grafica = document.createElement('button')
+                const iconGrafica = document.createElement('i')
+                iconGrafica.classList.add('fa-solid')
+                iconGrafica.classList.add('fa-chart-simple')
+                grafica.appendChild(iconGrafica)
+                grafica.className = 'grafica-button'
+                grafica.addEventListener('click' , () =>{
+                    generarGrafica(grupo.idGrupo)
+                })
                 const cuatrimestre = document.createElement('p')
                 const profesorAsignado = document.createElement('p')
                 const añoEscolar = document.createElement('p')
@@ -248,22 +259,22 @@ addEventListener('DOMContentLoaded' , () =>{
                 arrow.appendChild(arrowIcon)
                 arrow.id = 'arrow-button'
                 arrow.addEventListener('click' , () =>{
-                    descargarPDF(grupo.id)
+                    descargarPDF(grupo.idGrupo)
                 })
                 const idGrupo = document.createElement('p')
-                idGrupo.textContent = grupo.id
+                idGrupo.textContent = grupo.idGrupo
 
                 div.addEventListener('click' , () =>{
                     alumnos.innerHTML = ''
-                    alumnosEnGrupo(grupo.id , grupo.materia , grupo.cuatrimestre)
-                    
+                    alumnosEnGrupo(grupo.idGrupo , grupo.materia , grupo.cuatrimestre)
+            
                 })
                 
                 xIcon.classList.add('fa-solid')
                 xIcon.classList.add('fa-x')
                 eliminarButton.className = 'eliminar'
                 eliminarButton.addEventListener('click', () =>{
-                    deleteGroup(grupo.id)
+                    deleteGroup(grupo.idGrupo)
                 })
 
                 updateButton.addEventListener("click", () => {
@@ -273,10 +284,10 @@ addEventListener('DOMContentLoaded' , () =>{
                 pencil.classList.add('fa-solid')
                 pencil.classList.add('fa-pencil')
 
-                nombre.textContent = grupo.nombre
+                nombre.textContent = grupo.nombreGrupo
                 cuatrimestre.textContent = grupo.cuatrimestre
                 profesorAsignado.textContent = grupo.salon
-                añoEscolar.textContent = grupo.anio_escolar
+                añoEscolar.textContent = grupo.anioEscolar
                 materia.textContent = grupo.materia
 
                 updateButton.appendChild(pencil)
@@ -289,6 +300,7 @@ addEventListener('DOMContentLoaded' , () =>{
                 div.appendChild(añoEscolar)
                 div.appendChild(materia)
                 div.appendChild(updateButton)
+                div.appendChild(grafica)
                 div.appendChild(arrow)
                 div.appendChild(eliminarButton)  
                 groupDiv.appendChild(div)
@@ -300,6 +312,32 @@ addEventListener('DOMContentLoaded' , () =>{
         })
         .catch(error => console.error(error))
 })
+
+function generarGrafica(id){
+    console.log(id)
+    fetch('http://localhost:5000/grafica-pdf', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error al obtener PDF');
+            return response.blob();
+            
+        })
+        .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'grafica.pdf';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        })
+        .catch(console.error);
+}
+
 
 
 function descargarPDF(id , grupo){
@@ -317,7 +355,7 @@ function descargarPDF(id , grupo){
         if (!response.ok) {
             throw new Error('Error al generar el PDF');
         }
-        return response.blob();  // 👈 respuesta binaria
+        return response.blob();  
     })
     .then(blob => {
         const url = window.URL.createObjectURL(blob);
@@ -361,6 +399,7 @@ function subirCalificaciones(alumnoMatricula,grupoMateria,cuatrimestre,grupoId){
         const calificacionFinal = document.getElementById('calificacion-final').value
         let arrayDeCalificacionesSting = [primerParcial,segundoParcial,tercerParcial,examenExtraordinario,calificacionFinal]
         let arrayDeCalificacionesFloat =  arrayDeCalificacionesSting.map(value => parseFloat(value))
+        const estado = document.getElementById('estado')
         
 
              fetch("/subirCalificaciones" , {
@@ -378,16 +417,21 @@ function subirCalificaciones(alumnoMatricula,grupoMateria,cuatrimestre,grupoId){
                  tercerParcial: arrayDeCalificacionesFloat[2],
                  examenExtraordinario: arrayDeCalificacionesFloat[3],
                  calificacionFinal: arrayDeCalificacionesFloat[4],
+                 estado:estado.value
                 
              })
          })
-         .then(response => response.json())
-         .catch(error => console.error('Error', error) )
+         .then(response => alert('Calificaciones asignadas'))
+         .then(data => {
+            location.reload();
          })
+         .catch(error => console.error('Error', error) )
 
         
-
-
+         cerrarDiv(divSubirCalificaciones)
+         cerrarModal()
+        
+         })
     }
 
 
@@ -530,7 +574,7 @@ function inscribirAlumno(matriculaAlumno,nombreGrupo){
         });
     }
 
-        
+
 
 
 

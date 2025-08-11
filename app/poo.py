@@ -2,12 +2,18 @@ from flask import Flask , render_template , flash , redirect , url_for , jsonify
 from flask_mysqldb import MySQL #importa la biblioteca de mysql para trabajar con flask
 from flask.globals import session #importa las sessiones de flask
 from reportlab.pdfgen import canvas
+import matplotlib.pyplot as plt
+from flask_cors import CORS
+from reportlab.lib.utils import ImageReader
+import io
+import matplotlib
+matplotlib.use('Agg')
 from reportlab.lib.pagesizes import letter
 import os
  
 
 app = Flask(__name__) #inicia la aplicacion de flask
-
+CORS(app, origins=["http://127.0.0.1:5000", "http://localhost:5000"])
 #configuracion de la base de datos
 app.config['MYSQL_HOST'] = 'localhost' 
 app.config['MYSQL_USER'] = 'root'
@@ -113,7 +119,7 @@ def eliminar_grupo():
         
         #consulta que eliminara todos los alumnos que esten inscritos al grupo que se eliminara
         alumnos_inscritos_query_eliminar = """
-            DELETE FROM datosacademicosestudiante2 WHERE id_grupo = %s
+            DELETE FROM inscripciones WHERE id_grupo = %s
         """
         #utiliza el metodo eliminar que recibe la consulta alumnos_inscritos_query_eliminar
         alumnos_inscritos.eliminar(alumnos_inscritos_query_eliminar,id_grupo)
@@ -169,40 +175,23 @@ def login_usuario():
         
 
 
-#Ruta que que busca todos los grupos que esten en la base de datos relacionados con el profesor que ha iniciado sesion
 @app.route('/grupo', methods=['GET'])
 def mostrar_datos():
-    #consulta que busca todos los datos de cada grupo
-    query = """
-        SELECT id, nombre, cuatrimestre, salon, anio_escolar, materia FROM grupos WHERE MatriculaProf = %s
-    """
-    #guarda la matricula del profe en la sesion para mostrar todos los grupos que esten relacionados por el profesor que ha iniciado sesion
-    usuario_sesion = session['usuario']
-    mostrar_grupos = Usuario() #manda a llamar la clase usuario para usar el metodo buscar que busca los datos de los grupos en la base de datos
-    grupos = mostrar_grupos.buscar(query,usuario_sesion)
-    print(f"estos son los grupos encontrados{grupos}") 
+    query = "SELECT * FROM profesores_info WHERE matricula = %s"
+    usuario_sesion = session.get('usuario')
+    mostrar_grupos = Usuario()
+    grupos = mostrar_grupos.buscar(query, (usuario_sesion,))
+
     
+    columnas = ['matricula', 'nombre', 'apellidoPaterno', 'apellidoMaterno', 'especialidad',
+                'idGrupo', 'nombreGrupo', 'cuatrimestre', 'salon', 'anioEscolar', 'materia']
+
     resultados = []
+    for fila in grupos:
+        resultado = dict(zip(columnas, fila))
+        resultados.append(resultado)
 
-    # Paso 2: Por cada grupo, busca el nombre de la materia
-    for grupo in grupos:
-        id_grupo, nombre, cuatrimestre, salon, anio_escolar, id_materia = grupo
-        usuario_sesion = session['usuario']
-        query_materia = "SELECT Nombre_Materia FROM materia WHERE Clave_Materia = %s"
-        materia_resultado = mostrar_grupos.buscar(query_materia, (id_materia,))
-        nombre_materia = materia_resultado[0][0]
-
-        resultados.append({
-            'id': id_grupo,
-            'nombre': nombre,
-            'cuatrimestre': cuatrimestre,
-            'salon': salon,
-            'anio_escolar': anio_escolar,
-            'materia': nombre_materia 
-        })
-
-    return jsonify(resultados) #retorna los resultados en formato JSON
-
+    return jsonify(resultados)
     
         
 
@@ -309,7 +298,7 @@ def mostrar_calificaciones_alumnos():
     
     #consulta que busca a los alumnos que su clave foranea sea el id del grupo que previamente recibimos
     query = """
-        SELECT * FROM datosacademicosestudiante2
+        SELECT * FROM inscripciones
         WHERE id_grupo = %s
     """   
     cursor.execute(query, (id_grupo,)) #ejecuta la consulta
@@ -353,7 +342,7 @@ def inscribir_alumno():
 
         # Insertar en datosacademicosestudiante de esta tabla se extraeran los alumnos para mostralos en el feed del profesor
         datos_academicos_table_query = """
-            INSERT INTO datosacademicosestudiante2 
+            INSERT INTO inscripciones 
             (Matricula, id_grupo, cuatrimestre, Nombre, A_Paterno, A_Materno)
             VALUES (%s, %s, %s, %s, %s, %s)
         """
@@ -368,6 +357,11 @@ def inscribir_alumno():
         )
 
         cursor.execute(datos_academicos_table_query, datos_academicos_table_values)
+
+        user = Usuario()
+        carrera = user.buscar("""SELECT nombre FROM grupos WHERE id = %s""",(id_grupo,))
+        user.insercion("""UPDATE datosacademicosestudiante SET cuatrimestre = %s,carrera = %s WHERE Matricula = %s""",(cuatrimestre_grupo[0],carrera[0][0],matricula))
+
         mysql.connection.commit()
 
         return jsonify({
@@ -388,6 +382,7 @@ def inscribir_alumno():
 def subir_calificaciones_function():
     try:
         calificaciones = request.get_json()
+        print(calificaciones)
 
         # Extraer datos del JSON
         matricula = calificaciones.get('matricula')
@@ -399,6 +394,7 @@ def subir_calificaciones_function():
         materia_nombre = calificaciones.get('materia')
         cuatrimestre = calificaciones.get('cuatrimestre')
         id_grupo = calificaciones.get('id')
+        estado = calificaciones.get('estado')
 
         # Verificar sesión activa
         matricula_profesor = session.get('usuario')
@@ -426,10 +422,10 @@ def subir_calificaciones_function():
         if not resultado:
             query = """
                 INSERT INTO calificaciones_cuatri 
-                (Matricula, materia, MatriculaProf, P1, P2, P3, CF, EE, cuatrimestre, id_grupo)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                (Matricula, materia, MatriculaProf, P1, P2, P3, CF, EE, cuatrimestre, id_grupo,estado)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s)
             """
-            values = (matricula, materia_id, matricula_profesor, p1, p2, p3, cf, ee, cuatrimestre, id_grupo)
+            values = (matricula, materia_id, matricula_profesor, p1, p2, p3, cf, ee, cuatrimestre, id_grupo ,estado)
         else:
             query = """
                 UPDATE calificaciones_cuatri
@@ -439,7 +435,7 @@ def subir_calificaciones_function():
             values = (p1, p2, p3, cf, ee, matricula, materia_id, cuatrimestre)
 
         print(subir_calificaciones.insercion(query, values))
-        return None
+        return redirect(url_for('mostrar_teacher_feed'))
 
     except Exception as e:
         print("Error al subir calificaciones:", e)
@@ -575,8 +571,179 @@ def generar_pdf():
     
 #calificaciones_cuatri
 #datosgeneralesdelestudiante
-#profesor
+#profesor opcional
+#datosacademicosestudiante
 
+from flask import jsonify, session
+
+@app.route("/datos/alumno", methods=['GET'])
+def mostrar_datos_alumno():
+    try:
+        matricula_alumno = 'A00000001'
+        user = Usuario()
+
+        datos_generales_estudiante = user.buscar("""
+            SELECT * FROM datosgeneralesestudiante WHERE Matricula = %s
+        """, (matricula_alumno,))
+        
+        datos_academicos_estudiante = user.buscar("""
+            SELECT * FROM datosacademicosestudiante WHERE Matricula = %s
+        """, (matricula_alumno,))
+        
+
+        # Construir el JSON de respuesta
+        respuesta = {
+            "datos_generales": datos_generales_estudiante[0] if datos_generales_estudiante else {},
+            "datos_academicos": datos_academicos_estudiante[0] if datos_academicos_estudiante else {},
+            
+        }
+
+        return jsonify(respuesta)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/calificacionesCuatrimestre', methods=['POST'])
+def calificaciones_por_cuatrimestre():
+    try:
+        matricula = session.get('alumno')
+        datos = request.get_json()
+        cuatrimestre = datos.get('cuatrimestre')
+        user = Usuario()
+
+        # Usar la vista calificaciones
+        calificaciones = user.seleccion("""
+            SELECT clave_materia, nombre_materia, profesor, primerParcial, segundoParcial, tercerParcial, calificacionFinal, extraordinario, estado
+            FROM calificaciones
+            WHERE matricula = %s AND cuatrimestre = %s
+        """, matricula, cuatrimestre)
+
+        resultados = []
+        for cal in calificaciones:
+            resultados.append({
+                "clave_materia": cal[0],
+                "nombre_materia": cal[1],
+                "profesor": cal[2],
+                "calificacion": {
+                    "primer_parcial": cal[3],
+                    "segundo_parcial": cal[4],
+                    "tercer_parcial": cal[5],
+                    "CF": cal[6],
+                    "extraordinario": cal[7],
+                    "estado": cal[8]
+                }
+            })
+
+        return jsonify(resultados)
+    
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+@app.route('/grafica-pdf', methods=['POST'])
+def grafica_pdf():
+    try:
+        #  Obtener los datos enviados en formato JSON 
+        datos = request.get_json()
+        id = datos.get('id')
+
+        #  Crear instancia para consultar la base de datos 
+        user = Usuario()
+
+        #  Consultar las calificaciones del grupo con el id recibido
+        calificaciones = user.buscar("""
+            SELECT P1, P2, P3, CF, EE FROM calificaciones_cuatri WHERE id_grupo = %s
+        """, (id,))
+
+
+        #  Si no hay calificaciones para ese grupo, devolver mensaje y código 404
+        if not calificaciones:
+            return jsonify({"mensaje": "No hay datos para este grupo"}), 404
+
+        # 6. Separar cada tipo de calificación en listas individuales y convertir a float
+        P1 = [float(row[0]) for row in calificaciones]
+        P2 = [float(row[1]) for row in calificaciones]
+        P3 = [float(row[2]) for row in calificaciones]
+        CF = [float(row[3]) for row in calificaciones]
+        EE = [float(row[4]) for row in calificaciones]
+
+        # 7. Calcular promedio de cada tipo de calificación
+        promedios = {
+            'P1': sum(P1) / len(P1),
+            'P2': sum(P2) / len(P2),
+            'P3': sum(P3) / len(P3),
+            'CF': sum(CF) / len(CF),
+            'EE': sum(EE) / len(EE),
+        }
+
+        # 8. Preparar las etiquetas y valores para graficar
+        etiquetas = list(promedios.keys())
+        valores = list(promedios.values())
+
+        # 9. Crear figura con matplotlib y graficar barras
+        plt.figure(figsize=(6, 4))  # Tamaño figura (6x4 pulgadas)
+        plt.bar(etiquetas, valores, color='skyblue')  # Barras color azul claro
+        plt.title('Promedio de calificaciones')  # Título de la gráfica
+        plt.ylim(0, 10)  # Limitar eje Y de 0 a 10
+
+
+        img_buffer = io.BytesIO()
+        plt.savefig(img_buffer, format='PNG')  # Guardar en formato PNG
+        plt.close()  
+        img_buffer.seek(0)  
+
+        # 11. Crear buffer para el PDF y canvas con tamaño carta
+        pdf_buffer = io.BytesIO()
+        c = canvas.Canvas(pdf_buffer, pagesize=letter)
+
+        # 12. Leer la imagen desde el buffer para insertarla en el PDF
+        img = ImageReader(img_buffer)
+        # 13. Dibujar la imagen en el PDF (posición X=50, Y=500, tamaño 500x300)
+        c.drawImage(img, 50, 500, width=500, height=300)
+
+        # 14. Finalizar página y guardar el PDF en el buffer
+        c.showPage()
+        c.save()
+
+        pdf_buffer.seek(0)  # Volver al inicio del buffer para enviar
+
+        # 15. Enviar el PDF generado como archivo para descargar
+        return send_file(pdf_buffer, mimetype='application/pdf', download_name='grafica.pdf')
+
+    except Exception as e:
+        # 16. Si hay un error, imprimirlo en consola y devolverlo en JSON con código 500
+        print('Error:', e)
+        return jsonify({"error": str(e)}), 500
+    
+
+
+@app.route('/profesores', methods=['GET'])
+def mostrar_profesores():
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("""
+            SELECT MatriculaProf, Nombre, A_Paterno, A_Materno, especialidad 
+            FROM profesor
+        """)
+        resultados = cursor.fetchall()
+
+        # Convertir a lista de diccionarios para que JS reciba claves y valores
+        profesores = [
+            {
+                "MatriculaProf": row[0],
+                "Nombre": row[1],
+                "A_Paterno": row[2],
+                "A_Materno": row[3],
+                "Especialidad": row[4]
+            }
+            for row in resultados
+        ]
+
+        return jsonify(profesores)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+    
     
 
 @app.route('/teacher-feed') #ruta para renderizar el feed del profesor
@@ -597,8 +764,6 @@ def exit():
     return render_template('login.html')
 
 
-
-
-
 if __name__ == '__main__':
     app.run(debug=True)
+

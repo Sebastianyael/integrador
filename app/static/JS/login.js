@@ -1,5 +1,5 @@
 const textCard = document.getElementById('text-card')
-const text = "Hola y Bienvenido al sistema de ReNova UTVT"
+const text = "Bienvenido(a) a sistema de ReNova UTVT Estudiantes y profesores conectados en un solo sistema: consulta, publica y administra información académica de forma eficiente. Porque el aprendizaje también necesita una organización."
 const speed = 34
 let i = 0
 

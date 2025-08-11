@@ -40,7 +40,7 @@
 
     <div class="grupos">
         <div class="container-top">
-            <p>Grupos</p>
+            <p id="grupos-de" class="">Grupos</p>
             <div class="top-left">
                 <button class="crear" id="crear"> 
                     <i class="fa-solid fa-plus"></i>
@@ -100,7 +100,7 @@
                     <Option>Selecciona una opcion</Option>
                 </select>
 
-                <p class="salon">Salon</p>
+                <p class="salon">Salón</p>
                 <select name="salon" id="salon-select" class="input-tres"  required>
                     <option value="">Seleccione una opcion</option>
                     <option value="salon-1">Salon 1</option>
@@ -163,6 +163,11 @@
 
                 <p class="">Calificacion Final</p>
                 <input type="number" id="calificacion-final" step="any" required>
+
+                <select name="" id="estado">
+                    <option value="aprobado">Aprobado</option>
+                    <option value="reprobado">Reprobado</option>
+                </select>
             
                 <div class="div-bottom-form-calificaciones">
                     <button  type="button" class="cancelar" id="cancelar-div-calificaciones">
@@ -176,6 +181,13 @@
                 </div>
 
             
+        </div>
+
+        <div class="close-div off grafica-ventana" id="grafica-div">
+            <img src="" alt="" id="imgGrafica">
+
+            <button id="cerrarDivGrafica">cerrar</button>
+
         </div>
 
     </div>

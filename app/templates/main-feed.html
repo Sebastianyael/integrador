@@ -73,15 +73,25 @@
         <div class="profesores fondo4" id="profesores-card">
             <i class="fa-solid fa-user-tie"></i>
             <h1>Profesores</h1>
-            <h2>Los mejores en su area</h2>
+            <h2>Los mejores en su área</h2>
             <Button id="card-profesores">Vamos</Button>
         </div>
 
         <div class="student-info fondo5" id="student-card">
             <i class="fa-solid fa-school"></i>
             <h1>Tu</h1>
-            <h2>Informacion personal</h2>
-            <Button>Vamos</Button>
+            <h2>Información personal</h2>
+            <Button id="Información-personal-button">Vamos</Button>
+        </div>
+
+        <div class="Información-personal on-flex">
+            <p id="mat"></p>
+            <p id="nom"></p>
+            <p id="fecha"></p>
+            <p id="estado"></p>
+            <p id="rfc"></p>
+            <p id="curp"></p>
+            <p id="domicilio"></p>
         </div>
     </div>
 
@@ -89,15 +99,13 @@
         <div class="panel-info">
             
             <img src="{{ url_for('static' , filename = 'images/logo.png')}}" alt="">
-            <p class="name">Sebastian Yael Martinez Martinez</p>
+            <p class="name" id="nombre-completo"></p>
 
-            <p class="matricula">Matricula: </p>
+            <p class="matricula" id="matricula">Matrícula: </p>
 
-            <p class="carrera">Carrera: </p>
+         
 
-            <p class="correo">Correo: </p>
-
-            <p class="curso">Curso: </p>
+            <p class="correo" id="correo">Correo: </p>
 
         </div>
 
@@ -105,14 +113,14 @@
 
             <div>
                 <i class="fa-solid fa-brain"></i>
-                <p>Promedio General</p>
-                <p></p>
+                <p>Promedio</p>
+                <p id="promedio"></p>
             </div>
 
             <div>
                 <i class="fa-solid fa-book"></i>
                 <p>Materias</p>
-                <p></p>
+                <p id="numer_materia"></p>
             </div>
 
             <div>
@@ -123,19 +131,32 @@
 
         </div>
 
-        <div class="grafic-container">
-            <p>Grafica de Desempeño</p>
-
-        </div>
 
         <div class="faltas">
             <p>Faltas</p>
+            <p>PROXIMAMENTE</p>
 
         </div>
 
         <div class="notes-container">
-            <h2 style="text-align: center;">Tabla de Calificaciones</h2>
-
+            <div class="select-tittle">
+                <p class="curso" id="curso">Cuatrimestre: </p>
+                    <select name="cuatrimestre" class="curso" id="cuatrimestre-select" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Primero">Primero</option>
+                        <option value="Segundo">Segundo</option>
+                        <option value="Tercero">Tercero</option>
+                        <option value="Cuarto">Cuarto</option>
+                        <option value="Quinto">Quinto</option>
+                        <option value="Sexto">Sexto</option>
+                        <option value="Septimo">Septimo</option>
+                        <option value="Octavo">Octavo</option>
+                        <option value="Noveno">Noveno</option>
+                        <option value="Decimo">Decimo</option>
+                </select>
+                <button id="cuatrimetre-boton">enviar</button>
+                <h2 class="margin-left">Tabla de Calificaciones</h2>
+            </div>
                 <table>
                     <thead>
                         <tr>
@@ -145,73 +166,12 @@
                             <th>Evaluación 2</th>
                             <th>Evaluación 3</th>
                             <th>Promedio General</th>
+                            <th>Extraordinario</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Matemáticas</td>
-                            <td>Prof. García</td>
-                            <td>8.5</td>
-                            <td>9.0</td>
-                            <td>7.5</td>
-                            <td>8.33</td>
-                            <td>Aprobado</td>
-                        </tr>
-                        <tr>
-                            <td>Historia</td>
-                            <td>Prof. López</td>
-                            <td>7.0</td>
-                            <td>8.0</td>
-                            <td>7.5</td>
-                            <td>7.5</td>
-                            <td>Aprobado</td>
-                        </tr>
-                        <tr>
-                            <td>Ciencias</td>
-                            <td>Prof. Martínez</td>
-                            <td>9.5</td>
-                            <td>8.5</td>
-                            <td>9.0</td>
-                            <td>9.0</td>
-                            <td>Aprobado</td>
-                        </tr>
-                        <tr>
-                            <td>Geografía</td>
-                            <td>Prof. Hernández</td>
-                            <td>6.0</td>
-                            <td>7.0</td>
-                            <td>6.5</td>
-                            <td>6.5</td>
-                            <td>Reprobado</td>
-                        </tr>
-                        <tr>
-                            <td>Educación Física</td>
-                            <td>Prof. Ramírez</td>
-                            <td>9.0</td>
-                            <td>9.5</td>
-                            <td>9.0</td>
-                            <td>9.17</td>
-                            <td>Aprobado</td>
-                        </tr>
-                        <tr>
-                            <td>Artes</td>
-                            <td>Prof. Jiménez</td>
-                            <td>8.0</td>
-                            <td>7.5</td>
-                            <td>8.0</td>
-                            <td>7.83</td>
-                            <td>Aprobado</td>
-                        </tr>
-                        <tr>
-                            <td>Inglés</td>
-                            <td>Prof. Sánchez</td>
-                            <td>7.5</td>
-                            <td>7.0</td>
-                            <td>6.5</td>
-                            <td>7.0</td>
-                            <td>Aprobado</td>
-                        </tr>
+                    <tbody id="cuerpo-tabla">
+                        
                      </tbody>
                 </table>
         </div>
@@ -221,175 +181,10 @@
     <div class="horario-container off" id="feed-horario">
         <h1>Horario del Estudiante</h1>
 
-        <div class="datos-horario">
-            <p class="nombre">Sebastian Yael Martinez Martinez</p>
-            <p class="cuatrimestre">3 cuatrimestre</p>
-            <p class="año">2025</p>
-            <p class="grupo">ITIID-DSM33</p>
-        </div>
+        
 
         <div class="horario-table-container">
-            <table class="horario-table">
-                <tr>
-                    <th class="th-heigth">Hora</th>
-                    <th class="th-heigth">lunes</th>
-                    <th class="th-heigth">Martes</th>
-                    <th class="th-heigth">Miercoles</th>
-                    <th class="th-heigth">Jueves</th>
-                    <th class="th-heigth">Viernes</th>
-                    <th class="th-heigth">Sabado</th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </table>
+            <img src="{{url_for('static' , filename = 'images/Horario.webp')}}" alt="">
 
         </div>
     </div>
@@ -401,8 +196,8 @@
         </div>
     </div>
 
-    <div class="feed-teacher off" id="feed-teacher">
-        <section class="feed-teacher__card">
+    <div class="feed-teacher off" id="feed-teacher"> 
+        <!-- <section class="feed-teacher__card">
             <div class="cortina">
             </div>
             <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
@@ -410,57 +205,7 @@
             <p>Especialidad en Redes</p>
             <p>al1312321.@gmail.com</p>
             <p>1qs32dSm</p>
-        </section> 
-
-        <section class="feed-teacher__card">
-            <div class="cortina">
-            </div>
-            <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
-            <h1>Dr.Norma Maya</h1>
-            <p>Especialidad en Redes</p>
-            <p>al1312321.@gmail.com</p>
-            <p>1qs32dSm</p>
-        </section> 
-
-        <section class="feed-teacher__card">
-            <div class="cortina">
-            </div>
-            <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
-            <h1>Dr.Norma Maya</h1>
-            <p>Especialidad en Redes</p>
-            <p>al1312321.@gmail.com</p>
-            <p>1qs32dSm</p>
-        </section> 
-
-        <section class="feed-teacher__card">
-            <div class="cortina">
-            </div>
-            <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
-            <h1>Dr.Norma Maya</h1>
-            <p>Especialidad en Redes</p>
-            <p>al1312321.@gmail.com</p>
-            <p>1qs32dSm</p>
-        </section> 
-
-        <section class="feed-teacher__card">
-            <div class="cortina">
-            </div>
-            <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
-            <h1>Dr.Norma Maya</h1>
-            <p>Especialidad en Redes</p>
-            <p>al1312321.@gmail.com</p>
-            <p>1qs32dSm</p>
-        </section> 
-
-        <section class="feed-teacher__card">
-            <div class="cortina">
-            </div>
-            <img src="{{url_for('static' , filename='images/user.avif')}}" alt="" class="feed-teacher__img">
-            <h1>Dr.Norma Maya</h1>
-            <p>Especialidad en Redes</p>
-            <p>al1312321.@gmail.com</p>
-            <p>1qs32dSm</p>
-        </section> 
+        </section>   -->
     </div>
 </body>
 </html>

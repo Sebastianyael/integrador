@@ -17,7 +17,7 @@
     <div class="space" >
         <div class="card">
             <div class="login">
-                <p>Inicio de Sesion</p>
+                <p>Inicio de Sesión</p>
                 <img src="{{ url_for('static', filename='images/user.avif') }}" alt="">
                 <form action="{{ url_for('login_usuario') }}" method="post" id="form">
                     <label for="" id="label-one"></label>
@@ -52,7 +52,8 @@
                 const imagenes = [
                     "{{ url_for('static', filename = 'images/utvt1.jpg') }}",
                     "{{ url_for('static', filename = 'images/utvt2.jpg') }}",
-                    "{{ url_for('static', filename = 'images/utvt3.jpg') }}"
+                    "{{ url_for('static', filename = 'images/utvt3.jpg') }}",
+                    
                 ]
 
                 const imagen = document.getElementById('carrusel');
